@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HexCS-Reflection</name>
+    </assembly>
+    <members>
+        <member name="T:HexCS.Reflection.UTAssembly">
+            <summary>
+            Utilities used during refelection when handling assembly objects
+            </summary>
+        </member>
+        <member name="M:HexCS.Reflection.UTAssembly.GetTypesFromAssemblies(System.Reflection.Assembly[])">
+            <summary>
+            Gets all distinct types in the given assemblies. Assemblies that appear twice will be 
+            reporcessed (so it's inefficent to pass the same assembly twice)
+            </summary>
+            <param name="assemblies">assemblies to pull tpyes from</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Reflection.UTAssembly.GetTypesFiltered(System.Reflection.Assembly,System.Predicate{System.Type}[])">
+            <summary>
+            Returns all types from an assembly after testing each type against th eprovided filters
+            </summary>
+            <param name="assembly">assembly to get types from</param>
+            <param name="filters">filters to use</param>
+            <returns>types that return true on all filters</returns>
+        </member>
+        <member name="M:HexCS.Reflection.UTAssembly.GetAllNamespaces(System.Reflection.Assembly)">
+            <summary>
+            Gets all available namespaces in an Assembly
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Reflection.UTType">
+            <summary>
+            General utilties for Type objects
+            </summary>
+        </member>
+        <member name="M:HexCS.Reflection.UTType.NamespacesFromTypes(System.Type[],System.Int32)">
+            <summary>
+            Returns all distinct namespaces from an array of types based on a namespaces
+            level which represents how many steps in the namespace you're interested in. 
+            
+            Example: the namespace a.b.c.d with namespaceLevel 2 is a.b
+            </summary>
+            <param name="types"></param>
+            <param name="namespaceLevels"></param>
+            <returns>"_NoNamespace" if namespace == null </returns>
+        </member>
+        <member name="M:HexCS.Reflection.UTType.Map_PrivateTypeName(System.String)">
+            <summary>
+            A Map that removed the + characters that comes up in private class names and replaces them with a .
+            </summary>
+        </member>
+        <member name="M:HexCS.Reflection.UTType.Test_And(HexCS.Reflection.UTType.ETypeTest[])">
+            <summary>
+            <para>Test is a Type object is ETest using AND comparision</para>
+            </summary>
+            <param name="typeTest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Reflection.UTType.Test_Or(HexCS.Reflection.UTType.ETypeTest[])">
+            <summary>
+            <para>Test is a Type object is ETest using OR comparision</para>
+            </summary>
+            <param name="typeTest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Reflection.UTType.GetTest(HexCS.Reflection.UTType.ETypeTest)">
+            <summary>
+            <para> Returns a function that tests a type object. Returns true if Type meets criteria for ETypeTest</para>
+            </summary>
+            <param name="typeTest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Reflection.UTType.ETypeTest">
+            <summary>
+            Type of element you want to filter
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.ABSTRACT">
+            <summary>
+            filter abtract classes
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.SEALED">
+            <summary>
+            filter sealed classes
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.GENERIC">
+            <summary>
+            filter generic classes
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.ANONYMOUS">
+            <summary>
+            filter anonymous classes
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.TOBIAS_VALUE_TYPE">
+            <summary>
+            filter all value following Tobias conventions.
+            This means, value types, strings, struct (starting with S) and enums (starting with E)
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.INTERFACE">
+            <summary>
+            interface
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.ENUM">
+            <summary>
+            enum
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.STATIC">
+            <summary>
+            static
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.INTERNAL">
+            <summary>
+            internal
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.PUBLIC">
+            <summary>
+            public
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.PRIVATE">
+            <summary>
+            private
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.PROTECTED">
+            <summary>
+            protected
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.STRUCT">
+            <summary>
+            struct
+            </summary>
+        </member>
+        <member name="F:HexCS.Reflection.UTType.ETypeTest.CLASS">
+            <summary>
+            class
+            </summary>
+        </member>
+    </members>
+</doc>

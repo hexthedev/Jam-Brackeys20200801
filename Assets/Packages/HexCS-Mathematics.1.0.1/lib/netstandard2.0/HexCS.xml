@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HexCS-Mathematics</name>
+    </assembly>
+    <members>
+        <member name="T:HexCS.Mathematics.DEasingFunction">
+            <summary>
+            easing funciton take in some value between 0 and 1 and return
+            another value between 0 and 1. The new value is the interpolation
+            </summary>
+            <param name="t">time between 0 and 1</param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Mathematics.EEasingFunction">
+            <summary>
+            Easing functions commonly using in interpolations. 
+            Implementations taken from: http://gizma.com/easing/.
+            My functions work like this. 0 to 1 always.
+            1 |        x
+              |      x
+              |    x
+              |  x
+            0 |x _ _ _ _
+               0       1
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.Linear">
+            <summary>
+            Simple linear function
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.In_Quadratic">
+            <summary>
+            Simple Ease
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.Out_Quadratic">
+            <summary>
+            Simple ease out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.InOut_Quadratic">
+            <summary>
+            Ease in and out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.In_Cubic">
+            <summary>
+            Cubic ease in
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.Out_Cubic">
+            <summary>
+            cubic ease out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.InOut_Cubic">
+            <summary>
+            Cubic ease in out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.In_Quartic">
+            <summary>
+            Quartic ease in
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.Out_Quartic">
+            <summary>
+            Quartic ease out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.InOut_Quartic">
+            <summary>
+            Quartic ease in out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.In_Quintic">
+            <summary>
+            Quintic ease in
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.Out_Quintic">
+            <summary>
+            Quintic ease out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.InOut_Quintic">
+            <summary>
+            Quintic ease in out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.In_Sinusoidal">
+            <summary>
+            Sinusoidal ease in
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.Out_Sinusoidal">
+            <summary>
+            Sinusoidal ease out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.InOut_Sinusoidal">
+            <summary>
+            Sinusoidal ease in out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.In_Exponential">
+            <summary>
+            Exponential ease in
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.Out_Exponential">
+            <summary>
+            Exponential ease out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.InOut_Exponential">
+            <summary>
+            Exponential ease in out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.In_Circular">
+            <summary>
+            Circular ease in
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.Out_Circular">
+            <summary>
+            Circular ease out
+            </summary>
+        </member>
+        <member name="F:HexCS.Mathematics.EEasingFunction.InOut_Circular">
+            <summary>
+            Circular ease in out
+            </summary>
+        </member>
+        <member name="T:HexCS.Mathematics.UTEEasingFunction">
+            <summary>
+            Utility for easing functions
+            </summary>
+        </member>
+        <member name="M:HexCS.Mathematics.UTEEasingFunction.Function(HexCS.Mathematics.EEasingFunction)">
+            <summary>
+            Returns the appropriate function for the Easing function. Functions are only guarenteed
+            to wokr withing a range of (0, 1). Most funcitno will work outside these bounds, but
+            some will throw math errors
+            </summary>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Mathematics.Interpolation">
+            <summary>
+            Interpolation is the act of using an easing function to find a value between y0 and y1
+            based on a time value (t) witin a duration. It is used commonly in animation. 
+            </summary>
+        </member>
+        <member name="P:HexCS.Mathematics.Interpolation.Y1">
+            <summary>
+            Y Max. when t = diration, Y Max is returned
+            </summary>
+        </member>
+        <member name="P:HexCS.Mathematics.Interpolation.Y0">
+            <summary>
+            Y Min. when t = 0, Y Min is returned
+            </summary>
+        </member>
+        <member name="P:HexCS.Mathematics.Interpolation.YSpan">
+            <summary>
+            Distance between Y0 and Y1
+            </summary>
+        </member>
+        <member name="P:HexCS.Mathematics.Interpolation.Duration">
+            <summary>
+            The duration which t is tested against. Must be > 0
+            </summary>
+        </member>
+        <member name="P:HexCS.Mathematics.Interpolation.EasingFunction">
+            <summary>
+            The Easing function used by the interpolation
+            </summary>
+        </member>
+        <member name="M:HexCS.Mathematics.Interpolation.#ctor(System.Single,System.Single,System.Single,HexCS.Mathematics.EEasingFunction)">
+            <summary>
+            Construct an interpolation
+            </summary>
+            <param name="y0">min value on y axis</param>
+            <param name="y1">max value on y axis</param>
+            <param name="duration">duration of interpolation</param>
+            <param name="ease">easing function</param>
+        </member>
+        <member name="M:HexCS.Mathematics.Interpolation.Interpolate(System.Single)">
+            <summary>
+            Takes in a time value and interpolated between y1 and y0
+            based on the duration. Uses the easing function provided at construct time
+            </summary>
+            <param name="t">time, normally between 0 and duration, technically can be out of bounds</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Mathematics.Interpolation.Interpolate(System.Single,HexCS.Mathematics.EEasingFunction)">
+            <summary>
+            Takes in a time value and interpolated between y1 and y0
+            based on the duration. Uses the easing functin provided as an argument
+            </summary>
+            <param name="t">time, normally between 0 and duration, technically can be out of bounds</param>
+            <param name="ease">The easing funciton to use</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

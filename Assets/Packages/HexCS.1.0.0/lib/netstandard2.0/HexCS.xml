@@ -1,0 +1,2609 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HexCS</name>
+    </assembly>
+    <members>
+        <member name="T:HexCS.Core.ArrayConstructor`1">
+            <summary>
+            Used in a using statement to make it easier to construct arrays.
+            Create garbage during the creation process. 
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ArrayConstructor`1.AccessAfterDisposalMessage">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Core.ArrayConstructor`1.SetDisposablesToNull">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Core.ArrayConstructor`1.AppendToArray(`0[])">
+            <summary>
+            Append element to the array
+            </summary>
+            <param name="elements">The element you want to append</param>
+        </member>
+        <member name="M:HexCS.Core.ArrayConstructor`1.ToArray">
+            <summary>
+            Returns to constructed array as a new array
+            </summary>
+            <returns>The constructed array</returns>
+        </member>
+        <member name="T:HexCS.Core.ByteArrayExtractor">
+            <summary>
+            Extract info from a byte[] by holding an index and automatically
+            stepping through it every time you extract something
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ByteArrayExtractor.AccessAfterDisposalMessage">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.SetDisposablesToNull">
+            <inheritdoc/>
+        </member>
+        <member name="P:HexCS.Core.ByteArrayExtractor.RemainingBytes">
+            <summary>
+            Bytes remaining in the array that can be extracted
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.#ctor(System.Byte[])">
+            <summary>
+            Create a byte array extractor using the provided byte array
+            </summary>
+            <param name="extractionArray"></param>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.ExtractUInt">
+            <summary>
+            Extract uint from byte array
+            </summary>
+            <returns>extracted uint</returns>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.ExtractInt">
+            <summary>
+            Extract int from byte array
+            </summary>
+            <returns>extracted int</returns>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.ExtractBool">
+            <summary>
+            Extract bool from byte array
+            </summary>
+            <returns>extracted bool</returns>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.ExtractChar">
+            <summary>
+            Extract char from byte array
+            </summary>
+            <returns>extracted char</returns>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.ExtractFloat">
+            <summary>
+            Extract float from byte array
+            </summary>
+            <returns>extracted float</returns>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.ExtractDouble">
+            <summary>
+            Extract double from byte array
+            </summary>
+            <returns>extracted double</returns>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.ExtractString(System.Int32,System.Text.Encoding)">
+            <summary>
+            Extract a string from a byte array with a particular encoding
+            </summary>
+            <param name="length">The number of characters (not bytes) in the string</param>
+            <param name="encoding">The encoding which the string is encoded in</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.ByteArrayExtractor.ExtractRemaining">
+            <summary>
+            Extract remaining bytes in byte[] as new byte[]
+            </summary>
+            <returns>extracted byte[] containing remaining bytes</returns>
+        </member>
+        <member name="T:HexCS.Core.UTArray">
+            <summary>
+            Contains utility methods and extensions for working with arrays
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTArray.Combine``1(``0[],``0[])">
+            <summary>
+            Takes two arrays and combines them into a single array
+            </summary>
+            <typeparam name="T">array type</typeparam>
+            <param name="array1">first array</param>
+            <param name="array2">second array</param>
+            <returns>single array containing elements in array1 then array2</returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.EqualsElementWise``1(``0[],``0[])">
+            <summary>
+            Cheecks if an array is equal to another array by checking each element
+            based on index. Requires 
+            </summary>
+            <typeparam name="T">Array Type</typeparam>
+            <param name="array1">first array</param>
+            <param name="array2">second array</param>
+            <returns>true if both arrays are same size, and each element passes a .Equals() test</returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.SquareSideLength``1(``0[])">
+            <summary>
+            Takes a 1D array and returns the minimum array length to create a square 
+            2D array that can contain all elements. 
+            Example: An array length 4 returns 2, array length 6 return 3, array length 9 returns 3, etc. 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.ShallowCopy``1(``0[])">
+            <summary>
+            Copy an array, without copying the internals of contained classes. 
+            This means that referecnes are copied. 
+            </summary>
+            <typeparam name="T">Array type</typeparam>
+            <param name="array">Array to copy</param>
+            <returns>New shallow copy of an array</returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.RandomElement``1(``0[])">
+            <summary>
+            Returns a random element in the array
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array"></param>
+            <returns>element</returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.ConstructArray``1(System.Int32,System.Func{``0})">
+            <summary>
+            Constructs an array with each element created by calling constructionFuntion
+            </summary>
+            <typeparam name="T">array type</typeparam>
+            <param name="length">length of array</param>
+            <param name="constructionFunction">Function that constructs 1 T</param>
+            <returns>constructed array</returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.ConstructArray``1(System.Int32,System.Func{System.Int32,``0})">
+            <summary>
+            Construct an array using a function. The input to the function is the index of
+            the array element
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="length"></param>
+            <param name="constructionFunction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.ConstructArray``1(System.Int32,System.Func{System.Int32,``0[],``0})">
+            <summary>
+            Construct an array using a function. The input to the function is the index of
+            the array element and the array itself. 
+            </summary>
+            <typeparam name="T">array type</typeparam>
+            <param name="length">length of array</param>
+            <param name="constructionFunction">Function that constructs 1 T</param>
+            <returns>constructed array</returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.SubArray``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            Returns a portion of an array. End index is exclusive
+            </summary>
+            <typeparam name="T">Array type</typeparam>
+            <param name="target">Target Array</param>
+            <param name="start">index to start at</param>
+            <param name="end">index to end at (exclusive)</param>
+            <returns>new array containing elements between subarray indices</returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.AsSimpleString``1(``0[])">
+            <summary>
+            Returns a simple string version of the array. 
+            This is each element with a space between them. 
+            </summary>
+            <typeparam name="T">Array type</typeparam>
+            <param name="target">Array to target</param>
+            <returns>All elements as strings, with " " character between them</returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray.ContainsElements``1(``0[],``0[])">
+            <summary>
+            Checks if the target array contains all elements in the contains array
+            </summary>
+            <param name="target"></param>
+            <param name="contains"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.UTArray2D">
+            <summary>
+            Utility methods used for dealing with two dimensional arrays
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTArray2D.ConstructArray``1(HexCS.Core.DiscreteVector2,System.Func{``0})">
+            <summary>
+            Constructs a 2D array where each element is populated by the output
+            of a single call to the construction function
+            </summary>
+            <typeparam name="T">array type</typeparam>
+            <param name="size">size of the array</param>
+            <param name="constuctionFunction">Function that constructs 1 T</param>
+            <returns>Constructed array</returns>
+        </member>
+        <member name="M:HexCS.Core.UTArray2D.GetNeighbours``1(``0[0:,0:],HexCS.Core.DiscreteVector2,System.Int32,System.Boolean)">
+            <summary>
+            Returns an array of neighbour indices that are neighbouring the target index
+            A neighbour is n steps away from the index. In a 5x5 grid, the 1 step neighbours of the center index
+            would be all indices that are not on the edge of the grid. 2 step neighbours would be ALL indcies excepts the original index
+            Note: Neighbours can overlap and appear twice, neighbours are circular (the neighbour of coord (0,0) will be (width-1, height-1)).
+            If this is not desired, set nonNegativeOnly to true
+            </summary>
+            <typeparam name="T">Aray type</typeparam>
+            <param name="target">Target array</param>
+            <param name="index">Index to get neighbours of</param>
+            <param name="steps">steps away from index to collect neighbours</param>
+            <param name="nonNegativeOnly">This mode only returns neighbours that are non negative x or y steps away. This is useful if you are
+            iterating over a grid and trying to avoid duplicate neighbours</param>
+            <returns>Array of gird coordinates that </returns>
+        </member>
+        <member name="T:HexCS.Core.UTLinkedList">
+            <summary>
+            Utilities that facilitate common operations on LinkedList DataStructures
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTLinkedList.StepTowardsHead``1(System.Collections.Generic.LinkedList{``0},``0,System.Int32)">
+            <summary>
+            Move first occurence of an element towards the head of the list a number of steps. 
+            If steps is greater than steps to head, move to head. 
+            </summary>
+            <typeparam name="T">Type of list</typeparam>
+            <param name="list">The list containing elements</param>
+            <param name="obj">The objet to move up</param>
+            <param name="steps">The number of steps to move</param>
+            <returns>Number of steps taken, or -1 if object does not exist in list</returns>
+        </member>
+        <member name="M:HexCS.Core.UTLinkedList.StepTowardsTail``1(System.Collections.Generic.LinkedList{``0},``0,System.Int32)">
+            <summary>
+            Move first occurence of an element towards the tail of the list a number of steps. 
+            If steps is greater than steps to tail, move to tail. 
+            </summary>
+            <typeparam name="T">Type of list</typeparam>
+            <param name="list">The list containing elements</param>
+            <param name="obj">The objet to move down</param>
+            <param name="steps">The number of steps to move</param>
+            <returns>Number of steps taken, or -1 if object does not exist in list</returns>
+        </member>
+        <member name="M:HexCS.Core.UTLinkedList.JumpToHead``1(System.Collections.Generic.LinkedList{``0},``0)">
+            <summary>
+            Moves the obj to the head of the list
+            </summary>
+            <typeparam name="T">Type of list</typeparam>
+            <param name="list">The list containing elements</param>
+            <param name="obj">The objet to move to head</param>
+            <returns>Returns false if object wasn't in list, true otherwise</returns>
+        </member>
+        <member name="M:HexCS.Core.UTLinkedList.JumpToTail``1(System.Collections.Generic.LinkedList{``0},``0)">
+            <summary>
+            Moves the obj to the tail of the list
+            </summary>
+            <typeparam name="T">Type of list</typeparam>
+            <param name="list">The list containing elements</param>
+            <param name="obj">The objet to move to tail</param>
+            <returns>Returns false if object wasn't in list, true otherwise</returns>
+        </member>
+        <member name="T:HexCS.Core.UTList">
+            <summary>
+            Contains utility methods to facilitate common operations on List datastructures
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTList.ShallowCopy``1(System.Collections.Generic.List{``0})">
+            <summary>
+            Returns a copy of a list
+            </summary>
+            <param name="to_copy">List ot copy</param>
+            <typeparam name="T">List type</typeparam>
+            <returns>Copy of to_copy</returns>
+        </member>
+        <member name="M:HexCS.Core.UTList.GetAtIndexCircular``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            Returns objet at location using index, but if index is greater than list.count, will find index as if list was circular
+            </summary>
+            <param name="list">List to get element from</param>
+            <param name="index">Index, can be negative</param>
+            <typeparam name="T">list type</typeparam>
+            <returns>Object at position</returns>
+        </member>
+        <member name="M:HexCS.Core.UTList.Difference``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0})">
+            <summary>
+            Returns target minus any shared items with test. 
+            </summary>
+            <typeparam name="T">List type</typeparam>
+            <param name="target">The enumerable to return without tests elements</param>
+            <param name="test">The enumerable whose elements will be removed from target in the reture list</param>
+            <returns>Enumerable target without shared items in test. If target contains multiple elements, and that element exists in test once, all will be removed</returns>
+        </member>
+        <member name="T:HexCS.Core.CategorySet`1">
+            <summary>
+            Contains a type organized by categorizes. 
+            
+            Categorizes are detemrined by objects with the ICategorizable
+            interface. If it's not present, then uses unknown category
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.CategorySet`1.cCategoryUnknown">
+            <summary>
+            Label of the unknown category
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.CategorySet`1.CategorizedObjects">
+            <summary>
+            Get a dictionary containing categorized objects
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.CategorySet`1.Add(`0)">
+            <summary>
+            Add an object to the list
+            </summary>
+            <param name="ob"></param>
+        </member>
+        <member name="M:HexCS.Core.CategorySet`1.Remove(`0)">
+            <summary>
+            Remove the object
+            </summary>
+            <param name="ob"></param>
+        </member>
+        <member name="T:HexCS.Core.BasicEnumerable`1">
+            <summary>
+            Exists simply to wrap enumerator in enumerable for foreach loop easy
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:HexCS.Core.BasicEnumerable`1.#ctor(System.Collections.Generic.IEnumerator{`0})">
+            <summary>
+            Create a basic Enumerable
+            </summary>
+            <param name="enumerator">Enumerator</param>
+        </member>
+        <member name="M:HexCS.Core.BasicEnumerable`1.GetEnumerator">
+            <summary>
+            Get the enumerator from the enumerable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.SwitchRack">
+            <summary>
+            A switch rack can be visualized as N switches all set to off. 
+            Single switches can only be turned on.
+            Once all switches are true, the rack is considered active. 
+            At any time, all switches in the rack can be set to off
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.SwitchRack.Count">
+            <summary>
+            Total number of boolean flags (switches) in rack
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.SwitchRack.#ctor(System.Int32)">
+            <summary>
+            Creates a switch rack of _size_ number of switched
+            </summary>
+            <param name="size"></param>
+        </member>
+        <member name="P:HexCS.Core.SwitchRack.IsRackActive">
+            <summary>
+            Checks if all switches in the rack are set to true
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.SwitchRack.SetSwitch(System.Int32)">
+            <summary>
+            Sets the switch at _position_ to true
+            </summary>
+            <param name="position">the index of the switch to set</param>
+            <returns>Returns true is switch was not already true, and switch was changed from true to false</returns>
+        </member>
+        <member name="M:HexCS.Core.SwitchRack.ClearRack">
+            <summary>
+            Set all switches to false
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.Dirty`1">
+            <summary>
+            Represents a value and a function to set that value.
+            Bascially, when extracting the value, if dirty flag is true
+            the value will be recalculated. Otherwise the last calculated value is taken
+            </summary>
+            <typeparam name="TValue">Type of value</typeparam>
+        </member>
+        <member name="P:HexCS.Core.Dirty`1.Value">
+            <summary>
+            Get the value, will recalculate if dirty
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.Dirty`1.#ctor(System.Func{`0})">
+            <summary>
+            Make a dirty variable, passing in the recalculation function
+            </summary>
+            <param name="ValueCalculator"></param>
+        </member>
+        <member name="M:HexCS.Core.Dirty`1.ForceRecalculate">
+            <summary>
+            If the variable is dirty, calculates the new value
+            without returning it. Otherwise does nothing. 
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.Dirty`1.SetDirty">
+            <summary>
+            Set variable to dirty, so that it recaculates next time 
+            the value is accessed
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.BreathFirstSearchEnumerator`1">
+            <summary>
+            Returns an enumerator that traverses a tree in a BFS style. This means
+            return all nodes of a particular depth before moving to the next
+            depth
+            </summary>
+            <typeparam name="T">Tree type</typeparam>
+        </member>
+        <member name="P:HexCS.Core.BreathFirstSearchEnumerator`1.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.BreathFirstSearchEnumerator`1.#ctor(HexCS.Core.TreeNode{`0})">
+            <summary>
+            Create an BFS enumerator from the startNode
+            </summary>
+            <param name="startNode">node to start search from</param>
+        </member>
+        <member name="M:HexCS.Core.BreathFirstSearchEnumerator`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.BreathFirstSearchEnumerator`1.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.BreathFirstSearchEnumerator`1.Reset">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Core.DepthFirstSearchEnumerator`1">
+            <summary>
+            Returns an enumerator that traverses a tree in a DFS style. This means
+            to return nodes as they are seen be traversing the children until a leaf is found
+            </summary>
+            <typeparam name="T">Tree type</typeparam>
+        </member>
+        <member name="P:HexCS.Core.DepthFirstSearchEnumerator`1.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DepthFirstSearchEnumerator`1.#ctor(HexCS.Core.TreeNode{`0})">
+            <summary>
+            Create an DFS enumerator from the startNode
+            </summary>
+            <param name="startNode">node to start search from</param>
+        </member>
+        <member name="M:HexCS.Core.DepthFirstSearchEnumerator`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DepthFirstSearchEnumerator`1.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DepthFirstSearchEnumerator`1.Reset">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Core.TreeNode`1">
+            <summary>
+            Represents the node of a basic tree. 
+            - If you have one node, you have tree
+            - Must have parent, unless root, then null
+            - Contains children, can repeat value, can be any order 
+            - Leaf contains no children
+            - No caching, anything that can be calculated is
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:HexCS.Core.TreeNode`1.Root">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.TreeNode`1.Value">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.TreeNode`1.IsRoot">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.TreeNode`1.IsLeaf">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.TreeNode`1.DescendentCount">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.TreeNode`1.ChildCount">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.TreeNode`1.Depth">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.#ctor(`0)">
+            <summary>
+            Creates a new root tree node
+            </summary>
+            <param name="value">value of node</param>
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.#ctor">
+            <summary>
+            Node with default value
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.AddChild(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.AddChildren(`0[])">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.GetChild(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.RemoveChild(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.RemoveChild(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.SetValue(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Copy(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.SearchEnumeration(HexCS.Core.ETreeSearchType)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Union(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Union(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Union(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}},HexCS.Core.DMerge{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Intersection(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Intersection(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Difference(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Difference(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Difference(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}},HexCS.Core.DEquality{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Similarity(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.Similarity(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TreeNode`1.InternalAddChild(HexCS.Core.TreeNode{`0},HexCS.Core.TreeNode{`0})">
+            <summary>
+            Unsafe add child adds a child directly to the parent, then changes
+            the parent of the child. This targets private variables and, if implemented
+            incorrectly will cause major issues. 
+            </summary>
+            <param name="parent">The parent of the node to add</param>
+            <param name="child">The child to add to the parent</param>
+        </member>
+        <member name="T:HexCS.Core.UniqueChildrenTreeNode`1">
+            <summary>
+            A derivative of tree that can only contain tree nodes that have unqiue values
+            as neighbours
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:HexCS.Core.UniqueChildrenTreeNode`1.#ctor(`0)">
+            <summary>
+            Construct node with value
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:HexCS.Core.UniqueChildrenTreeNode`1.#ctor">
+            <summary>
+            COnstruct node with default value
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UniqueChildrenTreeNode`1.AddChild(`0)">
+            <summary>
+            Adds child and returns node if child with value does not already exist
+            Otherwise returns null
+            </summary>
+            <param name="value">value of node</param>
+            <returns>created child or null</returns>
+        </member>
+        <member name="M:HexCS.Core.UniqueChildrenTreeNode`1.SetValue(`0)">
+            <summary>
+            Sets value or resturns false if value is not unique to siblings
+            </summary>
+            <param name="value">value</param>
+            <returns>false if value exists in sibling</returns>
+        </member>
+        <member name="M:HexCS.Core.UniqueChildrenTreeNode`1.Similarity(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.UniqueChildrenTreeNode`1.Union(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}},HexCS.Core.DMerge{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.UniqueChildrenTreeNode`1.Intersection(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.UniqueChildrenTreeNode`1.Difference(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}},HexCS.Core.DEquality{`0})">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Core.ATreeNodeBase`1">
+            <summary>
+            Abstract tree class
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:HexCS.Core.ATreeNodeBase`1._parent">
+            <summary>
+            Parent of node
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.ATreeNodeBase`1._children">
+            <summary>
+            Children of node
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ATreeNodeBase`1.Parent">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.ATreeNodeBase`1.Children">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.ATreeNodeBase`1.Root">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.ATreeNodeBase`1.IsRoot">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.ATreeNodeBase`1.Value">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.ATreeNodeBase`1.IsLeaf">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.ATreeNodeBase`1.DescendentCount">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.ATreeNodeBase`1.ChildCount">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.ATreeNodeBase`1.Depth">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.AddChild(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.AddChildren(`0[])">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Copy(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.GetChild(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.RemoveChild(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.RemoveChild(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.SearchEnumeration(HexCS.Core.ETreeSearchType)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.SetValue(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Union(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Union(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Union(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}},HexCS.Core.DMerge{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Intersection(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Intersection(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Difference(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Difference(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Difference(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}},HexCS.Core.DEquality{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Similarity(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Similarity(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.ATreeNodeBase`1.Equals(HexCS.Core.ITreeNode{`0})">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Core.ETreeSearchType">
+            <summary>
+            The type of tree search. Normally related to the order that
+            things in the tree are searched
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.ETreeSearchType.DEPTHFIRST">
+            <summary>
+            Depth first search
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.ETreeSearchType.BREADTHFIRST">
+            <summary>
+            Bredth first search
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.ITreeNode`1">
+            <summary>
+            Tree nodes are a single node within a tree. They contain a value and can be
+            traversed as a tree data structure
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:HexCS.Core.ITreeNode`1.Root">
+            <summary>
+            Tree the node is contained in
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITreeNode`1.Parent">
+            <summary>
+            The Parent node of the tree
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITreeNode`1.Children">
+            <summary>
+            Get children as IEnumerable
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITreeNode`1.Value">
+            <summary>
+            The value of the node
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITreeNode`1.IsRoot">
+            <summary>
+            Is this node the root of the tree
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITreeNode`1.IsLeaf">
+            <summary>
+            Is this node a leaf in the tree
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITreeNode`1.DescendentCount">
+            <summary>
+            Gets full count count of all nodes in tree starting at this. 
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITreeNode`1.ChildCount">
+            <summary>
+            The number of children this node has
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITreeNode`1.Depth">
+            <summary>
+            Get the depth of the node
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.AddChild(`0)">
+            <summary>
+            Add a child to the tree node
+            </summary>
+            <param name="value">Value of child to add</param>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.AddChildren(`0[])">
+            <summary>
+            Add a multiple children to this node
+            </summary>
+            <param name="values">Valud of children to add</param>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.GetChild(System.Int32)">
+            <summary>
+            Get child at index
+            </summary>
+            <param name="index">index of child to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.RemoveChild(System.Int32)">
+            <summary>
+            Remove child at index
+            </summary>
+            <param name="index">index of child to remove</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.RemoveChild(HexCS.Core.ITreeNode{`0})">
+            <summary>
+            Remove node using reference
+            </summary>
+            <param name="node">reference to child to remove</param>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.SetValue(`0)">
+            <summary>
+            Change the value of the current node, return true if successful
+            </summary>
+            <param name="value">Set value of this node</param>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Copy(HexCS.Core.ITreeNode{`0})">
+            <summary>
+            Recursively copy a tree to a new parent
+            </summary>
+            <param name="newParent">newParent to copy tree to</param>
+            <returns>new node created under new parent</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.SearchEnumeration(HexCS.Core.ETreeSearchType)">
+            <summary>
+            Returns enumerator which moves through children of node in pattern
+            based on ETreeSearchType
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Union(HexCS.Core.ITreeNode{`0})">
+            <summary>
+            Take both trees and returns a new tree containing all paths 
+            from both
+            </summary>
+            <param name="other">other node</param>
+            <returns>new tree</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Union(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <summary>
+            Take both trees and returns a new tree containing all paths 
+            from both
+            </summary>
+            <param name="other">other node</param>
+            <param name="equality">function that acts as equality test</param>
+            <returns>new tree</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Union(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}},HexCS.Core.DMerge{`0})">
+            <summary>
+            Take both trees and returns a new tree containing all paths 
+            from both
+            </summary>
+            <param name="other">other node</param>
+            <param name="equality">function that acts as equality test</param>
+            <param name="merge">function that determines how values should be merged when equality = true</param>
+            <returns>new tree</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Intersection(HexCS.Core.ITreeNode{`0})">
+            <summary>
+            Takes both trees and returns a new tree containing only paths
+            each shares
+            </summary>
+            <param name="other">other node</param>
+            <returns>new node</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Intersection(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <summary>
+            Takes both trees and returns a new tree containing only paths
+            each shares
+            </summary>
+            <param name="other">other node</param>
+            <param name="equality">function that acts as equality test</param>
+            <returns>new node</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Difference(HexCS.Core.ITreeNode{`0})">
+            <summary>
+            Takes a tree and removes all paths shared with tree other
+            </summary>
+            <param name="other">other node</param>
+            <returns>new node</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Difference(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <summary>
+            Takes a tree and removes all paths shared with tree other
+            </summary>
+            <param name="other">other node</param>
+            <param name="traversalEquality">Equality test used to determine nodes to traverse</param>
+            <returns>new node</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Difference(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}},HexCS.Core.DEquality{`0})">
+            <summary>
+            Takes a tree and removes all paths shared with tree other
+            </summary>
+            <param name="other">other node</param>
+            <param name="traversalEquality">Determines whether another node should be traversed to determine a more granular deletion of internal paths</param>
+            <param name="deletionEquality">Determines whether another value is equal, and therefore should cause a deletion</param>
+            <returns>new node</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Similarity(HexCS.Core.ITreeNode{`0})">
+            <summary>
+            Returns a number representing the number of similar paths
+            this node has to another. More similar nodes have more shared paths
+            </summary>
+            <param name="other">node to compare with</param>
+            <returns>mesure of similarity</returns>
+        </member>
+        <member name="M:HexCS.Core.ITreeNode`1.Similarity(HexCS.Core.ITreeNode{`0},HexCS.Core.DEquality{HexCS.Core.ITreeNode{`0}})">
+            <summary>
+            Returns a number representing the number of similar paths
+            this node has to another. More similar nodes have more shared paths
+            </summary>
+            <param name="other">node to compare with</param>
+            <param name="equality">mesure of equality</param>
+            <returns>mesure of similarity</returns>
+        </member>
+        <member name="T:HexCS.Core.UTITreeNode">
+            <summary>
+            Utilites for ITreeNodes
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTITreeNode.MostSimilar``1(HexCS.Core.ITreeNode{``0},System.Collections.Generic.IEnumerable{HexCS.Core.ITreeNode{``0}})">
+            <summary>
+            Returns the most similar ITreeNode in the candidate ienumerable
+            </summary>
+            <typeparam name="T">tree type</typeparam>
+            <param name="target">target tree</param>
+            <param name="candidates">candidate trees</param>
+            <returns>most similar tree</returns>
+        </member>
+        <member name="M:HexCS.Core.UTITreeNode.BasicValueEquality``1">
+            <summary>
+            Returns a DEquality delegate that tests the basic .Equal() of two ITreeNodes
+            </summary>
+            <typeparam name="T">tree type</typeparam>
+            <returns>Basic DEqualityDeletgate</returns>
+        </member>
+        <member name="T:HexCS.Core.EnumDicitonary`2">
+            <summary>
+            A Simple Dictionary where every member of an Enum 
+            has an associated values that can be get; set;
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="P:HexCS.Core.EnumDicitonary`2.Item(`0)">
+            <summary>
+            Get or set an ability score
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.EnumDicitonary`2.#ctor(`1)">
+            <summary>
+            Set all keys to base value
+            </summary>
+            <param name="values"></param>
+        </member>
+        <member name="M:HexCS.Core.EnumDicitonary`2.#ctor(System.Collections.Generic.Dictionary{`0,`1},`1)">
+            <summary>
+            Construct EnumDictionary using Dictionary of preset values.
+            This Dictionary is not copied, it is used to lookup values. Any values that are not present
+            will be set to baseValue.
+            </summary>
+            <param name="values">scores to give to the set</param>
+            <param name="baseValue">bases score of abilities not included in scores</param>
+        </member>
+        <member name="T:HexCS.Core.UTEnum">
+            <summary>
+            Utilities for using Enums
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTEnum.GetEnumAsArray``1">
+            <summary>
+            Return an enum as an array of it's elements
+            </summary>
+            <typeparam name="TEnum">Enum</typeparam>
+            <returns>Enum values as array</returns>
+        </member>
+        <member name="M:HexCS.Core.UTEnum.Random``1">
+            <summary>
+            Returns a random element from an enum (This methods creates an array each time, if this needs doing a lot it's better to use GetEnumAsArray directly and get a Random elements from that instead). 
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <returns>Random Enum</returns>
+        </member>
+        <member name="M:HexCS.Core.UTEnum.GetNext``1(``0)">
+            <summary>
+            Based on enum order, provides the next enum following the input enum
+            </summary>
+            <typeparam name="TEnum">Enum</typeparam>
+            <param name="currentValue">Get next value given current value</param>
+            <returns>Next enum</returns>
+        </member>
+        <member name="T:HexCS.Core.Event">
+            <summary>
+            An Event object that can be subscribed to and invoked
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.Event.Subscribe(System.Action)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.Event.SubscribeSingleUse(System.Action)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.Event.Unsubscribe(System.Action)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.Event.Invoke">
+            <summary>
+            Invoke the event
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.Event`1">
+            <summary>
+            An Event object that can be subscripbed to and invoked
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.Event`1.Subscribe(System.Action{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.Event`1.SubscribeSingleUse(System.Action{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.Event`1.Unsubscribe(System.Action{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.Event`1.Invoke(`0)">
+            <summary>
+            Invoke the event
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.EventBinding">
+            <summary>
+            Encapsulated the subscribe/unsubscribe actions of a particular function
+            All event binding actions should occur through this object, because it
+            tracks whether an action is bound or not
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.EventBinding.#ctor(System.Action,System.Action)">
+            <summary>
+            Create event binding by providing functions to subscribe/unsubscribe events
+            </summary>
+            <param name="subscribe"></param>
+            <param name="unsubscribe"></param>
+        </member>
+        <member name="M:HexCS.Core.EventBinding.Subscribe">
+            <summary>
+            Subscribe the event binding (if not subscribed)
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.EventBinding.ForceFreshSubscription">
+            <summary>
+            Forces binding to unsubscribe old reference to funciton if exists
+            then resubscribes
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.EventBinding.UnSubscribe">
+            <summary>
+            Unsubscribe the event binding (if currently subscribed)
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.EventBindingGroup">
+            <summary>
+            Collection of event bindings that is useful for subscribing, unsubscribing
+            many bindings at once
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.EventBindingGroup.SubscribeAll">
+            <summary>
+            Subscribes all event bindings.
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.EventBindingGroup.UnSubscribeAll">
+            <summary>
+            Unsubscribes all event bindings
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.EventBindingGroup.ForceFreshSubscribeAll">
+            <summary>
+            Forces a fresh subscribtion on all event bindings
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.EventBindingGroup.ClearAndUnsubscribeAll">
+            <summary>
+            Clears the list and unsubsribes all bindings
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.PromptableEvent">
+            <summary>
+            A promptable event. On each call to Invoke, a promptable event
+            does not actually invoke any functions, it instead logs that some changes have occured
+            and awaits prompting. When promted, it calls invoke if changes have occured since last prompt
+            
+            It should be noted that multiple invoke calls between prompts will ignore old invoke calls
+            This is designed for only-latest-data-is-relevent events
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.PromptableEvent.#ctor">
+            <summary>
+            Constrcut a promptable event
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.PromptableEvent.Invoke">
+            <summary>
+            Marks event as invoked. Invoke will not occur until promted
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.PromptableEvent.Prompt">
+            <summary>
+            Prompts the event, meaning that if an invoke has occured since
+            last prompt, the event will be invoked
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.PromptableEvent`1">
+            <summary>
+            A promptable event. On each call to Invoke, a promptable event
+            does not actually invoke any functions, it instead logs that some changes have occured
+            and awaits prompting. When promted, it calls invoke if changes have occured since last prompt
+            
+            It should be noted that multiple invoke calls between prompts will ignore old invoke calls.
+            This is designed for only-latest-data-is-relevent events
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.PromptableEvent`1.#ctor">
+            <summary>
+            Constrcut a promptable event
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.PromptableEvent`1.Invoke(`0)">
+            <summary>
+            Marks event as invoked. Invoke will not occur until promted.
+            Caches args.
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.PromptableEvent`1.Prompt">
+            <summary>
+            Prompts the event, meaning that if an invoke has occured since
+            last prompt, the event will be invoked with the last cached arguments
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.IEvent">
+            <summary>
+            An Event object that can be subscribed to and invoked
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.IEvent.Invoke">
+            <summary>
+            Invoke the event
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.IEvent`1">
+            <summary>
+            An Event object that can be subscribed to and invoked
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.IEvent`1.Invoke(`0)">
+            <summary>
+            Invoke the event
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.IEventSubscriber">
+            <summary>
+            Allows Event to be subscribed or unsubscribed
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.IEventSubscriber.Subscribe(System.Action)">
+            <summary>
+            Subscribe to the event
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:HexCS.Core.IEventSubscriber.SubscribeSingleUse(System.Action)">
+            <summary>
+            Subscribe to the event for one time use. 
+            The event binding can be used to resubscribe for one time use
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:HexCS.Core.IEventSubscriber.Unsubscribe(System.Action)">
+            <summary>
+            Unsubscribe to the event
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="T:HexCS.Core.IEventSubscriber`1">
+            <summary>
+            Allows Event to be subscribed or unsubscribed
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.IEventSubscriber`1.Subscribe(System.Action{`0})">
+            <summary>
+            Subscribe to the event
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:HexCS.Core.IEventSubscriber`1.SubscribeSingleUse(System.Action{`0})">
+            <summary>
+            Subscribe to the event for one time use. 
+            The event binding can be used to resubscribe for one time use
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:HexCS.Core.IEventSubscriber`1.Unsubscribe(System.Action{`0})">
+            <summary>
+            Unsubscribe to the event
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="T:HexCS.Core.IdentitySet`1">
+            <summary>
+            An identity set stores references to objects that 
+            inherit the IIdentifiable interface
+            
+            - Missing Serialization Support
+            - Missing multithread support
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.#ctor(`0[])">
+            <summary>
+            Creates a new identify set with initial avlues
+            </summary>
+            <param name="values"></param>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.#ctor(HexCS.Core.IdentitySet{`0})">
+            <summary>
+            Create as copy of another set
+            </summary>
+            <param name="set"></param>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.#ctor(System.Int32)">
+            <summary>
+            Creates a set with underlying capacity limit
+            </summary>
+            <param name="capacity"></param>
+        </member>
+        <member name="P:HexCS.Core.IdentitySet`1.Item(System.Guid)">
+            <summary>
+            Get or set the value at the identity key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="P:HexCS.Core.IdentitySet`1.Values">
+            <summary>
+            Get all values
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.IdentitySet`1.Identities">
+            <summary>
+            Get all identitites
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.IdentitySet`1.Count">
+            <summary>
+            Get current element count
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.Add(`0)">
+            <summary>
+            Add an element
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.Clear">
+            <summary>
+            Clear the datastructure
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.ContainsIdentity(System.Guid)">
+            <summary>
+            true if the set contains the given identity
+            </summary>
+            <param name="identity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.ContainsValue(`0)">
+            <summary>
+            True is set contains value
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.Remove(System.Guid)">
+            <summary>
+            Remove the element with identity
+            </summary>
+            <param name="identity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.TryGetValue(System.Guid,`0@)">
+            <summary>
+            Try to get the value. returns false if get fails
+            </summary>
+            <param name="identity"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.GetEnumerator">
+            <summary>
+            Get enumerator
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.IdentitySet`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Get enumerator
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.IIdentifiable">
+            <summary>
+            An class that is IIdentifiable has a unique identity when compared to other
+            alike objects. Identities can be compared with other objects easily to check
+            if the objects are the same, independently of values.
+            
+            It is possible that two IIdentifiables have the same identity if the concrete
+            implementation of IIdentifiable are two completely different objects. Identity
+            uniqueness exists within a scope that the developer sets when using the interface.
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.IIdentifiable.Identity">
+            <summary>
+            The unique identity of the object
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.ICategorizable">
+            <summary>
+            Can be put into a category.
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ICategorizable.Category">
+            <summary>
+            Category
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.IPromptable">
+            <summary>
+            An object that is promptable requires prompting before performing some action.
+            
+            A good example is a promptable event. On each call to Invoke, a promptable event
+            does not actually invoke any functions, it instead logs that some changes have occured
+            and awaits prompting. When promted, it calls invoke if changes have occured since last prompt
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.IPromptable.Prompt">
+            <summary>
+            Prompt the object to perform actions if necessary
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.IVolitile">
+            <summary>
+            An object that provides a value with the potential to change
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:HexCS.Core.IVolitile.OnChange">
+            <summary>
+            Invoked when the object changes
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.UTIEnumerable">
+            <summary>
+            Contains utilities for working with enumerables
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTIEnumerable.Merge``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Take multiple IEnumerables and merge them into a single IEnumerable
+            </summary>
+            <param name="enumerables">Enumerable of Enumerables</param>
+            <typeparam name="T">Type of merging enumerable</typeparam>
+            <returns>single enumerable of type T</returns>  	
+        </member>
+        <member name="M:HexCS.Core.UTIEnumerable.Merge``1(System.Collections.Generic.IEnumerable{``0}[])">
+            <summary>
+            Take multiple IEnumerables and merge them into a single IEnumerable
+            </summary>
+            <param name="enumerables">enumerables</param>
+            <typeparam name="T">Type of merging enumerable</typeparam>
+            <returns>single enumerable of type T</returns>  	
+        </member>
+        <member name="M:HexCS.Core.UTIEnumerable.UniqueMerge``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Take multiple IEnumerables and merge them into a single IEnumerable with unique values
+            </summary>
+            <param name="enumerables">Enumerable of Enumerables</param>
+            <typeparam name="T">Type of merging enumerable</typeparam>
+            <returns>single enumerable of type T</returns>  	
+        </member>
+        <member name="M:HexCS.Core.UTIEnumerable.UniqueMerge``1(System.Collections.Generic.IEnumerable{``0}[])">
+            <summary>
+            Take multiple IEnumerables and merge them into a single IEnumerable with unique values
+            </summary>
+            <param name="enumerables">enumerables</param>
+            <typeparam name="T">Type of merging enumerable</typeparam>
+            <returns>single enumerable of type T</returns> 
+        </member>
+        <member name="M:HexCS.Core.UTIEnumerable.Difference``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns target minus any shared items with test. 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="target">The enumerable to return wihtou tests elements</param>
+            <param name="test">The enumerable whose elements will be removed from target in the reture list</param>
+            <returns>Enumerable target without shared items in test. If target contains multiple elements, and that element exists in test once, all will be removed</returns>
+        </member>
+        <member name="M:HexCS.Core.UTIEnumerable.Difference``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Returns target minus any shared items with test. 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="target">The enumerable to return wihtou tests elements</param>
+            <param name="test">The enumerable whose elements will be removed from target in the reture list</param>
+            <param name="comparison">Condition for a match</param>
+            <returns>Enumerable target without shared items in test. If target contains multiple elements, and that element exists in test once, all will be removed</returns>
+        </member>
+        <member name="M:HexCS.Core.UTIEnumerable.QueryContains``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})">
+            <summary>
+            Check if IEnumerable contains an element that returns true using query
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="target">The target enumerable</param>
+            <param name="query">Conditation for positive contains result</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTIEnumerable.QueryCount``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})">
+            <summary>
+            Count number of times function returns true
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="target">The target enumerable</param>
+            <param name="query">Conditation for positive contains result</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTIEnumerable.QueryIndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})">
+            <summary>
+            Get the position in IEnumerable of first true found in query. -1 if never found
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="target">The target enumerable</param>
+            <param name="query">Conditation for positive contains result</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:HexCS.Core.UTIEnumerable.CastedEnumerable``2(System.Collections.Generic.IEnumerable{``0})" -->
+        <member name="T:HexCS.Core.UTIEquatable">
+            <summary>
+            Utilities for IEquatable things
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTIEquatable.AreEqualUnorderedCollections``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Takes two IEquatable collections and tests to see if they are equal
+            without regard to order. That is, that each element in collection1 has
+            an equal corresponding element in collection 2, and collection2 does not
+            have any elements beyond those
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection1"></param>
+            <param name="collection2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTIEquatable.SharedValuesCount``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Takes a collection of unordered IEquatables and counts how many values are shared
+            woth the other. In 1,2,2,3,4 and 2,2,2,3,4 : 4 values are shared. 2,2,3,4
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection1"></param>
+            <param name="collection2"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.UTFloat">
+            <summary>
+            Utilities and extensions for floats
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTFloat.Clamp(System.Single,System.Single,System.Single)">
+            <summary>
+            Clamps the float between two values. min must be less thna or equal to max
+            </summary>
+            <param name="target">float to target</param>
+            <param name="min">minimum value</param>
+            <param name="max">maximum value</param>
+            <returns>clamped float</returns>
+        </member>
+        <member name="T:HexCS.Core.UTInt">
+            <summary>
+            Utilities for ints
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTInt.CircularMod(System.Int32,System.Int32)">
+            <summary>
+            Perform a that works negatively
+            </summary>
+            <param name="target">thing to mod</param>
+            <param name="modby">number to mod by</param>
+            <returns>mod of number</returns>
+        </member>
+        <member name="T:HexCS.Core.DiscreteVector2">
+            <summary>
+            A 2D coordinate with an x and y value where x and y are always integers. IMMUTABLE
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector2.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Make DiscreteVector2 with two int coordinates
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="P:HexCS.Core.DiscreteVector2.X">
+            <summary>
+            The X value of the coordinate
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.DiscreteVector2.Y">
+            <summary>
+            The Y value of the coordinate
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector2.op_Addition(HexCS.Core.DiscreteVector2,HexCS.Core.DiscreteVector2)">
+            <summary>
+            Returns new GridCoordinate2 with x and y values summed
+            </summary>
+            <param name="vec1">First GridCoordinate2</param>
+            <param name="vec2">Second GridCoordinate2</param>
+            <returns>addition</returns>
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector2.op_Subtraction(HexCS.Core.DiscreteVector2,HexCS.Core.DiscreteVector2)">
+            <summary>
+            Returns new GridCoordinate2 with x and y values subtracted.
+            </summary>
+            <param name="vec1">Minuhend</param>
+            <param name="vec2">Subtrahend</param>
+            <returns>difference</returns>
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector2.op_Equality(HexCS.Core.DiscreteVector2,HexCS.Core.DiscreteVector2)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector2.op_Inequality(HexCS.Core.DiscreteVector2,HexCS.Core.DiscreteVector2)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector2.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector2.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Core.DiscreteVector3">
+            <summary>
+            A 3D coordinate with an x and y and z value where x and y are always integers. IMMUTABLE
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector3.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Make DiscreteVector2 with two int coordinates
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="P:HexCS.Core.DiscreteVector3.X">
+            <summary>
+            The X value of the coordinate
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.DiscreteVector3.Y">
+            <summary>
+            The Y value of the coordinate
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.DiscreteVector3.Z">
+            <summary>
+            The Z value of the coordinate
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.DiscreteVector3.Zero">
+            <summary>
+            The zero vector
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector3.op_Addition(HexCS.Core.DiscreteVector3,HexCS.Core.DiscreteVector3)">
+            <summary>
+            Returns new GridCoordinate2 with x and y values summed
+            </summary>
+            <param name="vec1">First GridCoordinate2</param>
+            <param name="vec2">Second GridCoordinate2</param>
+            <returns>addition</returns>
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector3.op_Subtraction(HexCS.Core.DiscreteVector3,HexCS.Core.DiscreteVector3)">
+            <summary>
+            Returns new GridCoordinate2 with x and y values subtracted.
+            </summary>
+            <param name="vec1">Minuhend</param>
+            <param name="vec2">Subtrahend</param>
+            <returns>difference</returns>
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector3.op_Equality(HexCS.Core.DiscreteVector3,HexCS.Core.DiscreteVector3)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector3.op_Inequality(HexCS.Core.DiscreteVector3,HexCS.Core.DiscreteVector3)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector3.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DiscreteVector3.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Core.Vector2">
+            <summary>
+            2D Vector
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.Vector2.X">
+            <summary>
+            X coordinate of vector 2
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.Vector2.Y">
+            <summary>
+            Y Coordinate of a vector 2
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.Vector2.#ctor(System.Single,System.Single)">
+            <summary>
+            Construct Vector2
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="P:HexCS.Core.Vector2.Zero">
+            <summary>
+            Zero Vector
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.Vector2.op_Addition(HexCS.Core.Vector2,HexCS.Core.Vector2)">
+            <summary>
+            Returns new GridCoordinate2 with x and y values summed
+            </summary>
+            <param name="vec1">First GridCoordinate2</param>
+            <param name="vec2">Second GridCoordinate2</param>
+            <returns>addition</returns>
+        </member>
+        <member name="M:HexCS.Core.Vector2.op_Subtraction(HexCS.Core.Vector2,HexCS.Core.Vector2)">
+            <summary>
+            Returns new GridCoordinate2 with x and y values subtracted.
+            </summary>
+            <param name="vec1">Minuhend</param>
+            <param name="vec2">Subtrahend</param>
+            <returns>difference</returns>
+        </member>
+        <member name="M:HexCS.Core.Vector2.op_Equality(HexCS.Core.Vector2,HexCS.Core.Vector2)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.Vector2.op_Inequality(HexCS.Core.Vector2,HexCS.Core.Vector2)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.Vector2.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.Vector2.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Core.UTHash">
+            <summary>
+            Utilities to do with Hashes (objects reduced to unique numbers)
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTHash.BasicHash(System.Object[])">
+            <summary>
+            Uses algorithm found here:
+            https://stackoverflow.com/questions/263400/what-is-the-best-algorithm-for-an-overridden-system-object-gethashcode
+            
+            Gives a hash using all passed in objects
+            </summary>
+            <param name="objects"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTHash.HashComparison(System.Object,System.Object)">
+            <summary>
+            Comparison based on hash of two objects
+            </summary>
+            <param name="ob1"></param>
+            <param name="ob2"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.UTRandom">
+            <summary>
+            Utilties for gerating random numbers
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTRandom.Percentage">
+            <summary>
+            Returns a random number between 0 (inclusive) and 1 (exclusive)
+            </summary>
+            <returns>random number 0 - 1 exclusive of 1</returns>
+        </member>
+        <member name="M:HexCS.Core.UTRandom.PercentageF">
+            <summary>
+            Returns a random number between 0 (inclusive) and 1 (exclusive)
+            </summary>
+            <returns>random number 0 - 1 exclusive</returns>
+        </member>
+        <member name="M:HexCS.Core.UTRandom.TestPercentage(System.Single)">
+            <summary>
+            Tests float against a random percentage between 0 and 1. If float is greater than
+            or equal to percentage, return true. Otherwise return false;
+            </summary>
+            <param name="test">float to test</param>
+            <returns>result of random test</returns>
+        </member>
+        <member name="M:HexCS.Core.UTRandom.Int(System.Int32)">
+            <summary>
+            Returns an int between 0 and max (exclusive). Max must be > 0
+            </summary>
+            <param name="max">max int to random (exclusive)</param>
+            <returns>random int between 0 and max (exclusive)</returns>
+        </member>
+        <member name="M:HexCS.Core.UTRandom.Int(System.Int32,System.Int32)">
+            <summary>
+            Returns an int between 0 and max (exclusive). Max must be > 0
+            </summary>
+            <param name="min">max int to random (inclusive)</param>
+            <param name="max">max int to random (exclusive)</param>
+            <returns>random int between min (inclusive) and max (exclusive)</returns>
+        </member>
+        <member name="M:HexCS.Core.UTRandom.Bool(System.Double)">
+            <summary>
+            Get a Bool with a percentage change of being true
+            </summary>
+            <param name="chanceTrue">number between 0 and 1 chance of returning true</param>
+            <returns>random bool</returns>
+        </member>
+        <member name="M:HexCS.Core.UTRandom.Bytes(System.Int32)">
+            <summary>
+            Returns a random byte array
+            </summary>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.ASingleton`1">
+            <summary>
+            Implemntation of Singleton as an abstract class blinly folowing 
+            https://csharpindepth.com/articles/singleton version six until I 
+            have time to look closer
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:HexCS.Core.ASingleton`1.Instance">
+            <summary>
+            Singleton instance
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.DisposableManager">
+            <summary>
+            Automatically handles disposing of a group of disposables
+            when calling dispose
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.DisposableManager.#ctor(System.Action,System.String)">
+            <summary>
+            Give an action to set disposables to null, and a message when a disposable is
+            accessed after it's been disposed
+            </summary>
+            <param name="setDisposablesToNull"></param>
+            <param name="accessAfterDisposalMessage"></param>
+        </member>
+        <member name="M:HexCS.Core.DisposableManager.RegisterDisposable(System.IDisposable)">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Core.DisposableManager.UnregisterAndDispose(System.IDisposable)">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Core.DisposableManager.ThrowErrorIfDisposed">
+            <inheritdoc/>
+        </member>
+        <member name="P:HexCS.Core.DisposableManager.AccessAfterDisposalMessage">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Core.DisposableManager.SetDisposablesToNull">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Core.ADisposableManager">
+            <summary>
+            Abstract class that allows disposables to be registered for automatic 
+            disposable when main class is disposed
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ADisposableManager.AccessAfterDisposalMessage">
+            <summary>
+            The message that will be displayed with ObjectDisposedException if CheckDisposedError
+            called when disposed
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ADisposableManager.IsDisposed">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Core.ADisposableManager.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Core.ADisposableManager.ThrowErrorIfDisposed">
+            <summary>
+            If the class has been disposed throws exception
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.ADisposableManager.RegisterInteralDisposable(System.IDisposable)">
+            <summary>
+            Register a disposable that will be disposed on call to Dispose()
+            </summary>
+            <param name="disposable"></param>
+        </member>
+        <member name="M:HexCS.Core.ADisposableManager.DisposeAndUnregisterDisposable(System.IDisposable)">
+            <summary>
+            Dispose then deregister a disposable
+            </summary>
+            <param name="disposable"></param>
+        </member>
+        <member name="M:HexCS.Core.ADisposableManager.SetDisposablesToNull">
+            <summary>
+            Called during dispose to set dispoables to null
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.IDisposableResource">
+            <summary>
+            Disposable with extensions for TobiasCS
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.IDisposableResource.IsDisposed">
+            <summary>
+            Has the object been Disposed
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.SimpleGraphNode`1">
+            <summary>
+            Simple Tree nodes have a value and chidren
+            The value held by the tree is of type T
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:HexCS.Core.SimpleGraphNode`1.Value">
+            <summary>
+            Value of the node
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.SimpleGraphNode`1.Children">
+            <summary>
+            Children of the node
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.SimpleGraphNode`1.#ctor(`0)">
+            <summary>
+            Create a node with value T
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="T:HexCS.Core.UTStream">
+            <summary>
+            Utilties and extension methods for streams
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTStream.ReadAllBytes(System.IO.Stream)">
+            <summary>
+            Reads all bytes from a stream. This is used in the case when a you don't know how large the stream is. 
+            It reads the stream in chucks that are supplied to a List that is then converted into an array. This is
+            not efficient and creates garbage. Can be improved later. 
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.DCharQuery">
+            <summary>
+            CharQueries query a particular index of a string for certain properties. 
+            These are used in Parsing to determine key indices in the parse string
+            </summary>
+            <param name="target"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.ECharQuery">
+            <summary>
+            enumerates common char queries
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.ECharQuery.NewLine">
+            <summary>
+            Is the index an instance of a newline
+            i.e \r\n Windows, \n Linux. This function also checks backwards
+            so that \n is not taken when \r\n was already taken.
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.ECharQuery.NewLine_Windows">
+            <summary>
+            Is the index an instance of a Windows newline i.e \r\n
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.ECharQuery.NewLine_Linux">
+            <summary>
+            Is the index an instance of a Linux newline i.e \r\n
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.ECharQuery.StartOfLine">
+            <summary>
+            Was this character proceeded by \n
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.UTCharQuery">
+            <summary>
+            Contains helper methods for common CharQueries
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.UTCharQuery.cLinuxNewline">
+            <summary>
+            New line character for linux systems
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.UTCharQuery.cWindowsNewLine">
+            <summary>
+            New line character for windows systems
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTCharQuery.GetQuery(HexCS.Core.ECharQuery)">
+            <summary>
+            Returns a delegate that performs a query
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTCharQuery.GetOccurenceOfQuery(System.Char)">
+            <summary>
+            Constructs a query that tests if thte indexed string character is an
+            occurence of a particular character
+            </summary>
+            <param name="character"></param>
+        </member>
+        <member name="M:HexCS.Core.UTCharQuery.GetOccurenceBlockQuery(System.Char,System.Int32)">
+            <summary>
+            Constructs a query that tests if thte indexed string character is an
+            occurence of a block of characters. This will not count larger blocks.
+            </summary>
+            <param name="character"></param>
+            <param name="blockSize"></param>
+        </member>
+        <member name="T:HexCS.Core.CharQueryProcessor`1">
+            <summary>
+            Contains instructions that can be used to process a string into
+            relevent indices used for parsing
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:HexCS.Core.CharQueryProcessor`1.AnalysisInstructions">
+            <summary>
+            Queries checked against each character in a string to determine indices that match a mapping
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.CharQueryProcessor`1.SkipTests">
+            <summary>
+            Skip tests are performed before AnalysisInstructions to speed up analaysis. If they return true on
+            a character, the index is skipped
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.CharQueryProcessor`1.Analyze(System.String@)">
+            <summary>
+            Analyzes a string and returns an array of analysis units that hold info about imporant indices in the target string. 
+            foreach character in a string the analysis first checks that no skip test is passed, 
+            then uses AnalysisInstructions to test string index. When an AnalysisInstruction returns true, it is recorded
+            along with the instruction id
+            </summary>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.CharQueryAnalysisUnit`1">
+            <summary>
+            A single unit of analysis
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:HexCS.Core.CharQueryAnalysisUnit`1.Index">
+            <summary>
+            The index where a CharQueryMapping was detected
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.CharQueryAnalysisUnit`1.Id">
+            <summary>
+            The Id of the mapping that was detected
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.CharQueryMapping`1">
+            <summary>
+            A Char Query mapping is a mappying between a char query and an id
+            which can be used to create a StringAnalysis
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:HexCS.Core.CharQueryMapping`1.Id">
+            <summary>
+            The id associated with an index that passes the query
+            </summary>
+        </member>
+        <member name="F:HexCS.Core.CharQueryMapping`1.Query">
+            <summary>
+            The query to use to test the id
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.IndentStringBuilder">
+            <summary>
+            String Builder that allows user to specify an indent to apply as tabs in front of a string
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.IndentStringBuilder.CurrentIndent">
+            <summary>
+            The current indent in the string builder
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.IndentStringBuilder.#ctor(System.Int32,System.String)">
+            <summary>
+            Construct with inital indent and indent character
+            </summary>
+            <param name="initialIndent"></param>
+            <param name="indentChar"></param>
+        </member>
+        <member name="M:HexCS.Core.IndentStringBuilder.AppendLine(System.String,System.Int32)">
+            <summary>
+            Add a line to string buildren automatically indented
+            </summary>
+            <param name="toAppend"></param>
+            <param name="indentChange"></param>
+        </member>
+        <member name="M:HexCS.Core.IndentStringBuilder.Append(System.String,System.Int32)">
+            <summary>
+            Add a line to string buildren automatically indented
+            </summary>
+            <param name="toAppend"></param>
+            <param name="indentChange"></param>
+        </member>
+        <member name="M:HexCS.Core.IndentStringBuilder.AppendRaw(System.String,System.Int32)">
+            <summary>
+            Add a string to string buildren without adding tabs
+            </summary>
+            <param name="toAppend"></param>
+            <param name="indentChange"></param>
+        </member>
+        <member name="M:HexCS.Core.IndentStringBuilder.ChangeIndent(System.Int32)">
+            <summary>
+            Change the current indent
+            </summary>
+            <param name="change"></param>
+        </member>
+        <member name="M:HexCS.Core.IndentStringBuilder.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.IndentStringBuilder.Clear">
+            <summary>
+            Clears string cache and resets the current indent
+            </summary>
+        </member>
+        <member name="T:HexCS.Core.UTString">
+            <summary>
+            Class that contains string manipulation utilities
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTString.EnforceFistCharCaptialOnly(System.String)">
+            <summary>
+            Enforce that a string has only the first letter captialized
+            </summary>
+            <param name="target">target string</param>
+            <returns>string with only first char capital</returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.EnforceFistCharCaptial(System.String)">
+            <summary>
+            Enforce that the first character in the string is captital. Other characters are ignored
+            </summary>
+            <param name="target">target string</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.EnforceFistCharLowerCaseOnly(System.String)">
+            <summary>
+            Enforce that a string has only the first letter lowercase
+            </summary>
+            <param name="target">target string</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.EnforceFirstCharLowerCase(System.String)">
+            <summary>
+            Enforce that the first character in the string is lowercase. Other characters are ignored
+            </summary>
+            <param name="target">target string</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.EnforceSnakeCase(System.String[])">
+            <summary>
+            Takes an array of words and makes them snake case
+            </summary>
+            <param name="words"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.EnforceCamelCase(System.Boolean,System.String[])">
+            <summary>
+            Takes an array of words and makes them camel case
+            </summary>
+            <param name="isFirstCapital"></param>
+            <param name="words"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.RepeatedCharacter(System.String,System.Int32)">
+            <summary>
+            Returns a string that repears another string a numer of times
+            </summary>
+            <param name="character"></param>
+            <param name="times"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.CombineString(System.String[],System.String)">
+            <summary>
+            Taks an array of strings and combines them into a single string by placing a
+            combiner string between each element. 
+            
+            Example: {"a", "b" "c"}.CombineString(".") = "a.b.c"
+            </summary>
+            <param name="split"></param>
+            <param name="combiner"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.SeparatorLevelPrune(System.String,System.Char,System.Int32)">
+            <summary>
+            Splits a string based on a separator, then reconstructs the string up to the prune level.
+            If prune level lessthaneq 0, then no prune is performed and the original string is returned
+            If the prune level is greaterthaneq the number of  element sin the split string, returns the original string
+            Example: "a.b.c.d".SeparatorLevelPrune(".", 2) is "a.b"
+            </summary>
+            <param name="original">The original string</param>
+            <param name="separator">the string to split the original with</param>
+            <param name="pruneLevel">the prune level used in string reconstruction</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.SubStringBetween(System.String,System.String,System.String)">
+            <summary>
+            <para>Returns the string that exists between start and end. It does not include the start and end strings </para>
+            </summary>
+            <param name="original"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.GetLines(System.String)">
+            <summary>
+            Uses a Regex.Split() to get the sprint as an array of lines
+            </summary>
+            <param name="original"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.UTString.ScanUntilAll(System.String@,System.Int32@,HexCS.Core.DCharQuery[])">
+            <summary>
+            Move the index until the first character index that passes all of the char queries
+            provided in the query array. If query array is null or empty, sets index to last index in string
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="queries"></param>
+        </member>
+        <member name="M:HexCS.Core.UTString.ScanUntilOne(System.String@,System.Int32@,HexCS.Core.DCharQuery[])">
+            <summary>
+            Move the index until the first character index that passes one of the char queries
+            provided in the query array. If query array is null or empty, sets index to last index in string
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="queries"></param>
+        </member>
+        <member name="M:HexCS.Core.UTString.ScanUntil(System.String@,System.Int32@,HexCS.Core.DCharQuery)">
+            <summary>
+            Move the index until the first character index that passes the char query
+            provided in the query array. If query array is null or empty, sets index to last index in string
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="query"></param>
+        </member>
+        <member name="M:HexCS.Core.UTString.ScanToNewLineStart(System.String@,System.Int32@)">
+            <summary>
+            Moves the index to the index of the next line start. This is the character following /n. It is possible
+            that the index returned will be outside of the string index bounds. 
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+        </member>
+        <member name="M:HexCS.Core.UTString.LoopCharacterUntilStringEnd(System.String@,System.Int32,System.Func{System.Char,System.Boolean})">
+            <summary>
+            Performs an aciton on every character of a string automatically stopping at the end of the string. 
+            If the action returns true at any point, the loop will stop.
+            </summary>
+            <param name="s"></param>
+            <param name="startIndex"></param>
+            <param name="characterAction"></param>
+        </member>
+        <member name="M:HexCS.Core.UTString.LoopCharacterUntilLine(System.String@,System.Int32,System.Func{System.Char,System.Boolean})">
+            <summary>
+            Performs an action on every character of a string automatically stopping at the end of the next line
+            If the action returns true at any point, the loop will stop. This loops includes the /r/n or /n characters
+            </summary>
+            <param name="s"></param>
+            <param name="startIndex"></param>
+            <param name="characterAction"></param>
+        </member>
+        <member name="T:HexCS.Core.UTStringBuilder">
+            <summary>
+            String builder utilities
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.UTStringBuilder.AppendCharacterSeparatedCollection``1(System.Text.StringBuilder,System.Collections.Generic.IEnumerable{``0},System.Action{System.Text.StringBuilder,``0},System.String)">
+            <summary>
+            Appends to a StringBuilder a series of strings based on the collection and the resolver.
+            This was created to easily add , separated and \r\n separated lists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sb">The StringBuilder to build to</param>
+            <param name="collection">The collection to use when building strings</param>
+            <param name="resolver">The action to perform on each element</param>
+            <param name="separator">The separator to separate them by</param>
+        </member>
+        <member name="T:HexCS.Core.DoubleN">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.DoubleN.Value">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_Implicit(System.Double)~HexCS.Core.DoubleN">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_Implicit(HexCS.Core.DoubleN)~System.Double">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.#ctor(System.Double)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.AddTo(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_Addition(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.DivideBy(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_Division(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.GreaterThan(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_GreaterThan(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.GreaterThanOrEqualTo(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_GreaterThanOrEqual(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.IsEqualTo(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_Equality(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.IsNotEqualTo(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_Inequality(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.LessThan(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_LessThan(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.LessThanOrEqualTo(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_LessThanOrEqual(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.MultiplyBy(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_Multiply(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.SubtractBy(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_Subtraction(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.Modulo(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.op_Modulus(HexCS.Core.DoubleN,HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.CompareTo(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.GetTypeCode">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToBoolean(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToByte(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToChar(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToDateTime(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToDecimal(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToDouble(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToInt16(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToInt32(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToInt64(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToSByte(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToSingle(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToString(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToType(System.Type,System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToUInt16(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToUInt32(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToUInt64(System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToString(System.String,System.IFormatProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.CompareTo(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.Equals(HexCS.Core.DoubleN)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.DoubleN.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Core.INumerical`2">
+            <summary>
+            Interface to represent numbers so that they can be used as a type constraint
+            </summary>
+            <typeparam name="T">primative type (int, float, etc)</typeparam>
+            <typeparam name="TNumerical">INumerical type (same type as class inheriting, circular)</typeparam>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.AddTo(`1)">
+            <summary>
+            Adds instance of T to other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.SubtractBy(`1)">
+            <summary>
+            Subtracts instance of T to other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.MultiplyBy(`1)">
+            <summary>
+            Multiplies instance of T to other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.DivideBy(`1)">
+            <summary>
+            Divides instance of T to other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.Modulo(`1)">
+            <summary>
+            Modulo instance of T to other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.GreaterThan(`1)">
+            <summary>
+            Greater than instance of other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.GreaterThanOrEqualTo(`1)">
+            <summary>
+            Greater than or equal to instance of other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.IsEqualTo(`1)">
+            <summary>
+            Equal to instance of other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.IsNotEqualTo(`1)">
+            <summary>
+            Equal to instance of other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.LessThan(`1)">
+            <summary>
+            Less than other
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Core.INumerical`2.LessThanOrEqualTo(`1)">
+            <summary>
+            Less than or equal
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Core.ITypeTask">
+            <summary>
+            Required so that STypeTasks can be passed in generically even though each one
+            is type specific
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITypeTask.OnTrue">
+            <summary>
+            Action that fires when the type check returns true
+            </summary>
+        </member>
+        <member name="P:HexCS.Core.ITypeTask.OnFalse">
+            <summary>
+            Action that fires when the type check returns true
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.ITypeTask.PerformTask(System.Object)">
+            <summary>
+            Checks if the object is of a type then calls the appropriate action if true or false.
+            returns the result of the type check
+            </summary>
+            <param name="ob"></param>
+            <returns>result of type check</returns>
+        </member>
+        <member name="T:HexCS.Core.TypeTask`1">
+            <summary>
+            A TypeTask is a task that executes depending on whether a provided object is of a 
+            certain type.
+            </summary>
+            <typeparam name="TTest"></typeparam>
+        </member>
+        <member name="P:HexCS.Core.TypeTask`1.OnTrue">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Core.TypeTask`1.OnFalse">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Core.TypeTask`1.#ctor(System.Action{System.Object},System.Action{System.Object})">
+            <summary>
+            Construct a TypeTask
+            </summary>
+            <param name="onTrue">The action that will be called if a type test is true</param>
+            <param name="onFalse">If </param>
+        </member>
+        <member name="M:HexCS.Core.TypeTask`1.PerformTask(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Core.TypeTaskExecutor">
+            <summary>
+            Initialized with TypeTasks that execute in order.
+            There is an option to stop execution if a task return false or true
+            </summary>
+        </member>
+        <member name="M:HexCS.Core.TypeTaskExecutor.#ctor(HexCS.Core.ITypeTask[])">
+            <summary>
+            Construct TypeTaskExecutor
+            </summary>
+            <param name="tasks">Tasks in order of execution</param>
+        </member>
+        <member name="M:HexCS.Core.TypeTaskExecutor.#ctor(System.Boolean,System.Boolean,HexCS.Core.ITypeTask[])">
+            <summary>
+            Construct TypeTaskExecutor
+            </summary>
+            <param name="isStopIfTrue">If a task return type check true, don't execute more tasks</param>
+            <param name="isStopIfFalse">If a task returns type check false, don't execute more tasks</param>
+            <param name="tasks">Tasks in order of execution</param>
+        </member>
+        <member name="M:HexCS.Core.TypeTaskExecutor.PerformTasks(System.Object)">
+            <summary>
+            Performs type tasks on object
+            </summary>
+            <param name="ob">task object</param>
+        </member>
+        <member name="T:HexCS.Core.DEquality`1">
+            <summary>
+            Determine whether two objects are equal
+            </summary>
+            <typeparam name="T">type of equality</typeparam>
+            <param name="ob1">first object</param>
+            <param name="ob2">second object</param>
+            <returns>true if equal</returns>
+        </member>
+        <member name="T:HexCS.Core.DExceptionHandler">
+            <summary>
+            Takes an Exception as a parameter and handles it
+            </summary>
+            <param name="e">Exception object</param>
+        </member>
+        <member name="T:HexCS.Core.DMap`1">
+            <summary>
+            Maps an object of type T to another object of the same type
+            </summary>
+            <typeparam name="T">Type of map</typeparam>
+            <param name="original">The original object</param>
+            <returns>An object mapped to some new object</returns>
+        </member>
+        <member name="T:HexCS.Core.DMap`2">
+            <summary>
+            Maps object of type TOrig to new object of type TMap
+            </summary>
+            <typeparam name="TOrig">Type of original object</typeparam>
+            <typeparam name="TMap">Type of mapped object</typeparam>
+            <param name="original">The original object to map</param>
+            <returns>The new mapped object</returns>
+        </member>
+        <member name="T:HexCS.Core.DMerge`1">
+            <summary>
+            Takes two objects of the same type and merges them into a single object
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ob1"></param>
+            <param name="ob2"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,3534 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HexCS-Data</name>
+    </assembly>
+    <members>
+        <member name="T:HexCS.Data.Encryption.AKeyProviderAesSource">
+            <summary>
+            <para>Source key providers are used to hardcode keys into the dlls of an application.
+            This provides a level of key management that is only suitable for info you don't want
+            non-tech savvy users to get. If someone can unpack your dll, they can get the key. I would
+            use this technique only with info which isn't worth the inconvenience to decrypt</para>
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Encryption.AKeyProviderAesSource.Key">
+            <inheritdoc/>
+        </member>
+        <member name="P:HexCS.Data.Encryption.AKeyProviderAesSource.Iv">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Encryption.EncryptorAes">
+            <summary>
+            Object capable of encrypting and decrypting using AES encrption
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Encryption.EncryptorAes.KeyProvider">
+            <summary>
+            Provides the key and iv required to encrypt/decrypt.
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Encryption.EncryptorAes.#ctor(HexCS.Data.Encryption.IKeyProviderAes)">
+            <summary>
+            Create an AEncryptorAes class
+            </summary>
+            <param name="keyProvider"></param>
+        </member>
+        <member name="M:HexCS.Data.Encryption.EncryptorAes.Decrypt(System.Byte[])">
+            <summary>
+            Decrypt a buffer using Aes then deserialize buffer to object T. 
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Encryption.EncryptorAes.Encrypt(System.Byte[])">
+            <summary>
+            Encrpyt an object using the AES method
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Encryption.IKeyProviderAes">
+            <summary>
+            Provides key and iv to an Aes encryption class.
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Encryption.IKeyProviderAes.Key">
+            <summary>
+            The key to be used during encryption and decryption
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Encryption.IKeyProviderAes.Iv">
+            <summary>
+            The IV to be used during encryption and decryption
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Encryption.KeyProviderAesSimple">
+            <summary>
+            Simple key provider
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Encryption.KeyProviderAesSimple.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Data.Encryption.KeyProviderAesSimple.Iv">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Encryption.UTAesManaged">
+            <summary>
+            Helpers and extensions for the UTAesManaged type
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Encryption.UTAesManaged.FromKeyProvider(HexCS.Data.Encryption.IKeyProviderAes)">
+            <summary>
+            Constructs a new AesManaged from a keyProvider
+            </summary>
+            <param name="keyProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Encryption.IEncryptor">
+            <summary>
+            Capable of taking some object of type T and changing it to an encryted byte[].
+            It can also take a byte[] and decrypt it
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Encryption.IEncryptor.Encrypt(System.Byte[])">
+            <summary>
+            Encrypt the object
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Encryption.IEncryptor.Decrypt(System.Byte[])">
+            <summary>
+            Decrypt the buffer into an object
+            </summary>
+            <param name="buffer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.IndentProvider">
+            <summary>
+            Provides an indent value (int)
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.IndentProvider.Indent">
+            <summary>
+            The indent value. Number of tabs to apply
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.IndentProvider.IndentCharacter">
+            <summary>
+            The character used to indent the generated line
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.IndentProvider.IgnoreIndent">
+            <summary>
+            Set this to true if indent calculatation should ignore indent
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.IndentProvider.IndentString">
+            <summary>
+            Returns a string repeating 3 spaces (tabs converted to 3 spaces) based on indent
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.IndentProvider.#ctor(System.Int32)">
+            <summary>
+            Constrcut an indent provided
+            </summary>
+            <param name="indent">initial indent</param>
+        </member>
+        <member name="T:HexCS.Data.Generation.AGenerator">
+            <summary>
+            Implements the disposable behaviour of a Generator class. 
+            Generators hold an internal reference to an externally provided StringBuilder, 
+            which is populated using the Generate function. The default behaviour of the class is
+            for Generate to be called on Dispose(), allowing it to be used with using statements. 
+            
+            NOTE: All base classes should be prefixed with GT
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.AGenerator.#ctor">
+            <summary>
+            Empty generator. Note that empty generators will not function correctly. The
+            empty constructor is used internally.
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.AGenerator.OutputBuilder">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Data.Generation.AGenerator.IndentProvider">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.AGenerator.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct generator. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.AGenerator.CreateInternalGenerator``1">
+            <summary>
+            Creates a generator instance of a particular type that will generate internal
+            to this generator, meaning it will follow the indent. 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.AGenerator.Generate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.AGenerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Generation.IGenerator">
+            <summary>
+            Generators are classes that have a generate function. The original purpose of Generate() is to
+            write strings to an internally referenced StringBuilder(), which is passed through a tree
+            to other Generators so that a complete file can be generated. 
+            
+            Also, the developer facing behaviour of a generator is that Generate() is automatically called
+            if Dispose() is called. This allows generators to be used in using() statements. This was done
+            as a syntax experiment, to see if this made writing generation code easier. 
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.IGenerator.IndentProvider">
+            <summary>
+            The level of indent that should be applied to the generated output
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.IGenerator.OutputBuilder">
+            <summary>
+            Returns reference to the StringBuilder used at output
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.IGenerator.Generate">
+            <summary>
+            Pushes generated strings to an internal StringBuilder. 
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.ArgCollection">
+            <summary>
+            A Collection of CSharpParamters that can eaisly be converted into a string
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.ArgCollection.Count">
+            <summary>
+            Number of args in the collection
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.ArgCollection.Args">
+            <summary>
+            The paramaters in the collection
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ArgCollection.AddArgs(HexCS.Data.Generation.CSharp.IArg[])">
+            <summary>
+            Add paramaters to the collection
+            </summary>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ArgCollection.ToArgString">
+            <summary>
+            Returns the paramters as if they are function inputs
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.Arg_Basic">
+            <summary>
+            Represents an argument for a function. 
+            This is not a named argument
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Arg_Basic.Keywords">
+            <summary>
+            Parameter keywords
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Arg_Basic.Value">
+            <summary>
+            Value of the argument
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Arg_Basic.#ctor(System.String)">
+            <summary>
+            Arg with single value
+            </summary>
+            <param name="value">Value of the arg</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Arg_Basic.ToArgumentString">
+            <summary>
+            Get this as a standard paramter string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.Arg_Named">
+            <summary>
+            Represents an argument for a function. 
+            This arg has a name, which gives it the name = value pattern
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Arg_Named.Keywords">
+            <summary>
+            Parameter keywords
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Arg_Named.Name">
+            <summary>
+            Name of paramter to apply arg to
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Arg_Named.Value">
+            <summary>
+            Value of the argument
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Arg_Named.#ctor(System.String,System.String)">
+            <summary>
+            Arg with single value
+            </summary>
+            <param name="name">Name of paramter to apply arg</param>
+            <param name="value">Value fo the arg</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Arg_Named.ToArgumentString">
+            <summary>
+            Get this as a standard paramter string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.Arg_OutInstantiator">
+            <summary>
+            Represents an argument for a function. 
+            This arg instanciates an out object with the syntax out type x
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Arg_OutInstantiator.Name">
+            <summary>
+            Name of paramter to apply arg to
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Arg_OutInstantiator.Type">
+            <summary>
+            Type of instantiation
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Arg_OutInstantiator.#ctor(System.String,System.String)">
+            <summary>
+            Arg with single value
+            </summary>
+            <param name="name">Name of paramter to apply arg</param>
+            <param name="type">type of instantiation</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Arg_OutInstantiator.ToArgumentString">
+            <summary>
+            Get this as a standard paramter string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IArg">
+            <summary>
+            Outs a string for CSharp function argument
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.IArg.ToArgumentString">
+            <summary>
+            Returns a string representing the argument
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.EnumValue">
+            <summary>
+            Represents an enum value. 
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.EnumValue.Name">
+            <summary>
+            Enum value name
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.EnumValue.Value">
+            <summary>
+            Enum value
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.EnumValue.#ctor(System.String,System.String)">
+            <summary>
+            Enum value
+            </summary>
+            <param name="name">Name of enum arg</param>
+            <param name="value">Value of enum arg</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.EnumValue.ToEnumValueString">
+            <summary>
+            Get this as a standard paramter string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IEnumValue">
+            <summary>
+            Outs an enum value string
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.IEnumValue.ToEnumValueString">
+            <summary>
+            Returns a string representing enum value
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GenericTypeCollection">
+            <summary>
+            Represents an enum value. 
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GenericTypeCollection.Types">
+            <summary>
+            The types names, ex: T, T1
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GenericTypeCollection.Constraints">
+            <summary>
+            constraints, ex: T1 : IList
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GenericTypeCollection.#ctor(System.String[])">
+            <summary>
+            GenericTypes
+            </summary>
+            <param name="types">types in definition</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GenericTypeCollection.ToGenericTypeString">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GenericTypeCollection.ToTypeConstrainStrings">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.InheritanceTypeCollection">
+            <summary>
+            A Collection of inherited types
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.InheritanceTypeCollection.InheritedTypes">
+            <summary>
+            The paramaters in the collection
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.InheritanceTypeCollection.ToInheritanceString">
+            <summary>
+            Returns an inheritance string " : Type, Type, Type"
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.KeywordsCollection">
+            <summary>
+            A collection of CSharp keywords that can be output as a string
+            in the following pattern "keyword keywork keyword ..."
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.KeywordsCollection.Count">
+            <summary>
+            Number of keywords added
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.KeywordsCollection.Keywords">
+            <summary>
+            Keywords currently added to collection
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.KeywordsCollection.#ctor(HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Construct a keyword collection with keywords
+            </summary>
+            <param name="keywords"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.KeywordsCollection.AddKeywords(HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Adds keywords to back of collection in order
+            </summary>
+            <param name="keywords">keywords to add</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.KeywordsCollection.ToKeywordString">
+            <summary>
+            Returns keyword colleciton as usable keyword string. Ends in " " character.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.EKeyword">
+            <summary>
+            The accessor used by the field
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.PUBLIC">
+            <summary>
+            public
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.PRIVATE">
+            <summary>
+            private
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.PROTECTED">
+            <summary>
+            protected
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.STATIC">
+            <summary>
+            static
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.CLASS">
+            <summary>
+            class
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.INTERFACE">
+            <summary>
+            interface
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.ENUM">
+            <summary>
+            enum
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.READONLY">
+            <summary>
+            readonly
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.CONST">
+            <summary>
+            const
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.GET">
+            <summary>
+            get
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.SET">
+            <summary>
+            set
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.OUT">
+            <summary>
+            out
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.REF">
+            <summary>
+            ref
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.INTERNAL">
+            <summary>
+            internal
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.ABSTRACT">
+            <summary>
+            abstract
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.VIRTUAL">
+            <summary>
+            virtual
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.EKeyword.OVERRIDE">
+            <summary>
+            override
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.UTEKeyword">
+            <summary>
+            Utilities for ECSharpAccesseor enum
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.UTEKeyword.ToCSharpString(HexCS.Data.Generation.CSharp.EKeyword)">
+            <summary>
+            Get UTECSharpAccesseor as accessor string
+            </summary>
+            <param name="keyword">accesor</param>
+            <returns>csharp accessor string</returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.UTEKeyword.IsPropertyFunction(HexCS.Data.Generation.CSharp.EKeyword)">
+            <summary>
+            Is this a property keyword
+            </summary>
+            <param name="keyword">accessor</param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.UTEKeyword.IsAccessor(HexCS.Data.Generation.CSharp.EKeyword)">
+            <summary>
+            Is this an accessor
+            </summary>
+            <param name="keyword">accessor</param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.ParameterCollection">
+            <summary>
+            A Collection of CSharpParamters that can eaisly be converted into a string
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.ParameterCollection.Paramaters">
+            <summary>
+            The paramaters in the collection
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ParameterCollection.AddParameters(HexCS.Data.Generation.CSharp.IParameterBlock[])">
+            <summary>
+            Add paramaters to the collection
+            </summary>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ParameterCollection.ToFunctionInputString">
+            <summary>
+            Returns the paramters as if they are function inputs
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.Parameter_Basic">
+            <summary>
+            Represents a parameter
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Parameter_Basic.Keywords">
+            <summary>
+            Parameter keywords
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Parameter_Basic.Type">
+            <summary>
+            Parameter type
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Parameter_Basic.Name">
+            <summary>
+            Parameter Names
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.Parameter_Basic.DefaultValue">
+            <summary>
+            The default value of the parameter
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Parameter_Basic.#ctor">
+            <summary>
+            Default constructor for custom constructing
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Parameter_Basic.#ctor(System.String,System.String)">
+            <summary>
+            Make a basic paramter
+            </summary>
+            <param name="type">type</param>
+            <param name="name">name</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Parameter_Basic.#ctor(System.String,System.String,System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Make a basic paramter
+            </summary>
+            <param name="type">type</param>
+            <param name="name">name</param>
+            <param name="defaultValue">default value</param>
+            <param name="keywords">keywords preceeeding the parameter</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.Parameter_Basic.ToParameterString">
+            <summary>
+            Get this as a standard paramter string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IParameterBlock">
+            <summary>
+            Represents a paramter block. There are multiple types of paramter blocks
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.IParameterBlock.ToParameterString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTDataModel_Public">
+            <summary>
+            Generates a simple data model in C# where all fields are public
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTDataModel_Public.Usings">
+            <summary>
+            The usings that will appear at the top of the file
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTDataModel_Public.Namespace">
+            <summary>
+            The namespace of the model
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTDataModel_Public.ModelArgs">
+            <summary>
+            The args used to generate the model
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTDataModel_Public.#ctor(System.Text.StringBuilder,Hex.Paths.PathString,System.Text.Encoding)">
+            <summary>
+            Construct GTDataModel. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+            <param name="path">path to the file to write to</param>
+            <param name="encoding">encoding to write file in</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTDataModel_Public.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTDataModel_Public.SetRequired(HexCS.Data.Generation.CSharp.GTDataModel_Public.Model)">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTDataModel_Public.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTDataModel_Public.Generate_Field``1">
+            <summary>
+            returns a generator for a field
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTDataModel_Public.Generate_Usings``1">
+            <summary>
+            returns a generator for file usings. Extra calls will override last value
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTDataModel_Public.Model">
+            <summary>
+            Arguments for generting a model
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTDataModel_Public.Model.ModelName">
+            <summary>
+            Name of the model
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTDataModel_Public.Model.Comment">
+            <summary>
+            Comment applied tot he model
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTDataModel_Public.Model.Fields">
+            <summary>
+            The fields the model contains
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTDataModel_Public.ModelField">
+            <summary>
+            Arguments required to generate a model field
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTDataModel_Public.ModelField.Name">
+            <summary>
+            Name of the model
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTDataModel_Public.ModelField.Type">
+            <summary>
+            Field type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTDataModel_Public.ModelField.DefaultValue">
+            <summary>
+            Default value of the model
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTDataModel_Public.ModelField.Comment">
+            <summary>
+            Comment applied tot he model
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTAttribute">
+            <summary>
+            Used to generate attributes in c#
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTAttribute.Name">
+            <summary>
+            Name of the attribute
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTAttribute.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTAttribute. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTAttribute.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTAttribute.SetRequired(System.String)">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTAttribute.Generate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTAttribute.Add_Args(HexCS.Data.Generation.CSharp.IArg[])">
+            <summary>
+            Add args to the attribute
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IAttribute">
+            <summary>
+            A generator that generates an attribute
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTClass">
+            <summary>
+            Generates a CSharp function
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTClass.Name">
+            <summary>
+            Name of the class
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTClass.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTClass. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTClass.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTClass.SetRequired(System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTClass.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTClass.Generate_Field``1">
+            <summary>
+            returns a generator for a field
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTClass.Generate_Property``1">
+            <summary>
+            returns a generator for a property
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTClass.Generate_Function``1">
+            <summary>
+            returns a generator for a function
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IClass">
+            <summary>
+            A generator that generates a class
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTComment">
+            <summary>
+            Used to generate xml comments in CSharp code
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTComment.Summary">
+            <summary>
+            Comment summary
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTComment.Returns">
+            <summary>
+            Comment return details
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTComment. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment.SetRequired(System.String)">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment.Generate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment.Add_Paramater(HexCS.Data.Generation.CSharp.GTComment.Parameter)">
+            <summary>
+            Add a paramter to the comments
+            </summary>
+            <param name="paramater">paramter to add</param>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTComment.Parameter">
+            <summary>
+            Variables required to generate "~param name="NAME"~ DETAILS ~/param~" string
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTComment.Parameter.Name">
+            <summary>
+            Name of the parameter
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTComment.Parameter.Details">
+            <summary>
+            Details explaining paramater
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment.Parameter.#ctor(System.String,System.String)">
+            <summary>
+            Create comment parameter
+            </summary>
+            <param name="name">name of the paramter</param>
+            <param name="details">deatils explaining the paramters</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment.Parameter.ToGeneratorString">
+            <summary>
+            Output as generated string for AGenerator classes
+            </summary>
+            <returns>generated string in xml format</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTComment_Inheritdoc">
+            <summary>
+            Used to generate xml comments in CSharp code
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment_Inheritdoc.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTComment_Inheritdoc. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment_Inheritdoc.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTComment_Inheritdoc.Generate">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IComment">
+            <summary>
+            A generator that generates a comment
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTEnum">
+            <summary>
+            Generates a CSharp enum
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTEnum.Name">
+            <summary>
+            Name of the enum
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTEnum.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTClass. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTEnum.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTEnum.SetRequired(System.String,HexCS.Data.Generation.CSharp.EnumValue[],HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTEnum.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTEnum.Add_EnumValues(HexCS.Data.Generation.CSharp.EnumValue[])">
+            <summary>
+            Add an enum value to the enum
+            </summary>
+            <param name="enumValues"></param>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IEnum">
+            <summary>
+            A generator that generates a enum
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTField">
+            <summary>
+            Generates a Csharp field
+            
+            Note: End of generation applies new line
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTField.Type">
+            <summary>
+            The type of the field
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTField.Name">
+            <summary>
+            The name of the field
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTField.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTField. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTField.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTField.SetRequired(System.String,System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTField.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTField.Generate_DefaultValue``1">
+            <summary>
+            Generate a DefaultValue for this field
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IField">
+            <summary>
+            A generator that generates a field
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTFile">
+            <summary>
+            Generates a CSharp function
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFile.#ctor(System.Text.StringBuilder,Hex.Paths.PathString,System.Text.Encoding)">
+            <summary>
+            Construct GTClass. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+            <param name="path">path to the file to write to</param>
+            <param name="encoding">encoding to write file in</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFile.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFile.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFile.Generate_Namespace``1">
+            <summary>
+            returns a generator for a namespace
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFile.Generate_Usings``1">
+            <summary>
+            returns a generator for file usings. Extra calls will override last value
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTFunction_Abstract">
+            <summary>
+            Generates a CSharp abstract function
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTFunction_Abstract.ReturnType">
+            <summary>
+            Return type of the function
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTFunction_Abstract.Name">
+            <summary>
+            Name of the function
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Abstract.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTFunction. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Abstract.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Abstract.SetRequired(System.String,System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Abstract.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Abstract.Add_Paramaters(HexCS.Data.Generation.CSharp.IParameterBlock[])">
+            <summary>
+            Adds paramaters to the function
+            </summary>
+            <param name="parameters"></param>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTFunction_Implementation">
+            <summary>
+            Generates a CSharp function with an implemenation
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTFunction_Implementation.ReturnType">
+            <summary>
+            Return type of the function
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTFunction_Implementation.Name">
+            <summary>
+            Name of the function
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Implementation.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTFunction. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Implementation.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Implementation.SetRequired(System.String,System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Implementation.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Implementation.Add_Parameters(HexCS.Data.Generation.CSharp.IParameterBlock[])">
+            <summary>
+            Adds paramaters to the function
+            </summary>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTFunction_Implementation.Add_Statements(System.String[])">
+            <summary>
+            Adds statements to the function
+            </summary>
+            <param name="statements"></param>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IFunction">
+            <summary>
+            A generator that generates a function
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTInterface">
+            <summary>
+            Generates a CSharp function
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTInterface.Name">
+            <summary>
+            Name of the interface
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterface.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTInterface. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterface.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterface.SetRequired(System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterface.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterface.Generate_Definition``1">
+            <summary>
+            returns a generator for a interface definition
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IInterface">
+            <summary>
+            A generator that generates a class
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Function">
+            <summary>
+            A definition for a function that should appear in an interface
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Function.ReturnType">
+            <summary>
+            The function definition return type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Function.Name">
+            <summary>
+            The funciton definition name
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Function.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTFunction. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Function.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Function.SetRequired(System.String,System.String)">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Function.Generate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Function.Add_Paramaters(HexCS.Data.Generation.CSharp.IParameterBlock[])">
+            <summary>
+            Add Paramaters tot the Interface Definition
+            </summary>
+            <param name="parameters"></param>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Property">
+            <summary>
+            A definition for a function that should appear in an interface
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Property.Get">
+            <summary>
+            Does this definition contain a get function
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Property.Set">
+            <summary>
+            Does this definition contain a set function
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Property.ReturnType">
+            <summary>
+            The function definition return type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Property.Name">
+            <summary>
+            The funciton definition name
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Property.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTFunction. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Property.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Property.SetRequired(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTInterfaceDefinition_Property.Generate">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IInterfaceDefinition">
+            <summary>
+            A definition that can occur in an interface
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTNamespace">
+            <summary>
+            Generates a CSharp namespace
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTNamespace.NameSpace">
+            <summary>
+            Name of the class
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTNamespace.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTClass. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTNamespace.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTNamespace.SetRequired(System.String)">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTNamespace.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTNamespace.Generate_NamespaceObject``1">
+            <summary>
+            returns a generator for a field
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.INamespace">
+            <summary>
+            Generates a namespace
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.INamespaceObject">
+            <summary>
+            Generates a namespace object. This is any object that can live in a namespace.
+            i.e. class, interface, enum, etc. 
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTProperty_GetOnly">
+            <summary>
+            Generates a property in a class that uses get only syntax. Name => Value;
+            
+            Note: End of generation does not apply new line
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_GetOnly.Type">
+            <summary>
+            The type of the field
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_GetOnly.Name">
+            <summary>
+            The name of the field
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_GetOnly.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTProperty. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_GetOnly.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_GetOnly.SetRequired(System.String,System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_GetOnly.Generate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_GetOnly.Generate_DefaultValue``1">
+            <summary>
+            returns a generator for a field
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTProperty_MultiLine">
+            <summary>
+            Generates a property in a class
+            
+            Note: End of generation does not apply new line
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.Type">
+            <summary>
+            The type of the field
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.Name">
+            <summary>
+            The name of the field
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.GetFunction">
+            <summary>
+            Get function paramters
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.SetFunction">
+            <summary>
+            Set function paramters
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.DefaultValue">
+            <summary>
+            Does this filed have a default value
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTProperty. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.SetRequired(System.String,System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.Generate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.Generate_DefaultValue``1">
+            <summary>
+            returns a generator for a field
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.FunctionParams">
+            <summary>
+            Parameters describing the state of a property function
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.FunctionParams.IsPresent">
+            <summary>
+            Is this function present
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.FunctionParams.Statements">
+            <summary>
+            What are the statements in the function
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_MultiLine.FunctionParams.Keywords">
+            <summary>
+            Keywords in front of the property
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTProperty_OneLine">
+            <summary>
+            Generates a property in a class
+            
+            Note: End of generation does not apply new line
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_OneLine.Type">
+            <summary>
+            The type of the field
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_OneLine.Name">
+            <summary>
+            The name of the field
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_OneLine.GetFunction">
+            <summary>
+            Get function paramters
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_OneLine.SetFunction">
+            <summary>
+            Set function paramters
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTProperty_OneLine.DefaultValue">
+            <summary>
+            Does this filed have a default value
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_OneLine.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTProperty. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_OneLine.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_OneLine.SetRequired(System.String,System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_OneLine.Generate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTProperty_OneLine.Generate_DefaultValue``1">
+            <summary>
+            returns a generator for a field
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTProperty_OneLine.FunctionParams">
+            <summary>
+            Parameters describing the state of a property function
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_OneLine.FunctionParams.IsPresent">
+            <summary>
+            Keywords in front of the property
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_OneLine.FunctionParams.Statement">
+            <summary>
+            Keywords in front of the property
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTProperty_OneLine.FunctionParams.Keywords">
+            <summary>
+            Keywords in front of the property
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IProperty">
+            <summary>
+            A generator that generates a Property
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTStruct">
+            <summary>
+            Generates a CSharp function
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.GTStruct.Name">
+            <summary>
+            Name of the class
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTStruct.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTStruct. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTStruct.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTStruct.SetRequired(System.String,HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Set the required parameters for this generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTStruct.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTStruct.Generate_Field``1">
+            <summary>
+            returns a generator for a field
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTStruct.Generate_Property``1">
+            <summary>
+            returns a generator for a property
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTStruct.Generate_Function``1">
+            <summary>
+            returns a generator for a function
+            </summary>
+            <returns>Property Function Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IStruct">
+            <summary>
+            A generator that generates a struct
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTUsings">
+            <summary>
+            Generates usings for CSharp files.
+            
+            Note: End of generation applies new line
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTUsings.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct GTUsings. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTUsings.#ctor">
+            <summary>
+            Internal empty constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTUsings.SetRequired(System.String[])">
+            <summary>
+            Set required parameters for this generator
+            </summary>
+            <param name="usings"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTUsings.Add_Usings(System.String[])">
+            <summary>
+            Add a using with the provided namespace
+            </summary>
+            <param name="namesp">namespace to add</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTUsings.Generate">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IUsings">
+            <summary>
+            A generator that generates a usings
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTValue">
+            <summary>
+            Generator for when a value is amn object initializer. Example: new SObjectName { This = That, AnotherThing = 7 }
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTValue.Value">
+            <summary>
+            The name of the object. 
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue.SetRequired(System.String)">
+            <summary>
+            Set required parameters for this generator
+            </summary>
+            <param name="val">The value</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue.Generate">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTValue_ArrayInitializer">
+            <summary>
+            Generator for when a value is amn object initializer. Example: new SObjectName { This = That, AnotherThing = 7 }
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTValue_ArrayInitializer.ArrayType">
+            <summary>
+            The type of the array. if int[] just write int
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTValue_ArrayInitializer.IsInline">
+            <summary>
+            Should this start generating at the current generation point, or should a new line be used.
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ArrayInitializer.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ArrayInitializer.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ArrayInitializer.SetRequired(System.String,System.Boolean)">
+            <summary>
+            Set required parameters for this generator
+            </summary>
+            <param name="arrayType">The type of array. if int[] then arrayType=int</param>
+            <param name="isInline">Should generation start on the line or down a line</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ArrayInitializer.Generate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ArrayInitializer.Generate_Value``1">
+            <summary>
+            Generate a named value to be initlaized in the object initalizer
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.GTValue_ObjectInitializer">
+            <summary>
+            Generator for when a value is amn object initializer. Example: new SObjectName { This = That, AnotherThing = 7 }
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTValue_ObjectInitializer.ObjectType">
+            <summary>
+            The name of the object. 
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.GTValue_ObjectInitializer.IsInline">
+            <summary>
+            Should this start generating at the current generation point, or should a new line be used.
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ObjectInitializer.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ObjectInitializer.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ObjectInitializer.SetRequired(System.String,System.Boolean)">
+            <summary>
+            Set required parameters for this generator
+            </summary>
+            <param name="objectName">The type of the object</param>
+            <param name="isInline">Shoudl generation start on the line or down a line</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ObjectInitializer.Generate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.GTValue_ObjectInitializer.Generate_NamedValue``1(System.String)">
+            <summary>
+            Generate a named value to be initlaized in the object initalizer
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IValue">
+            <summary>
+            <para>Used for any value. Values most commonly come after = signs, or are used as arguments in functions</para>
+            <example>x = IValue, Func1(IValue);</example>
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.SNameValuePair">
+            <summary>
+            Used in value constructors. Name = Value. THe name is a string and the value
+            is capable of generating a value
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.SNameValuePair.Name">
+            <summary>
+            Name label used to name the value
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.CSharp.SNameValuePair.Value">
+            <summary>
+            The generator that can generate the value
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.ACommentableGenerator">
+            <summary>
+            A generator that allows the user to supply an xml comment
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ACommentableGenerator.#ctor">
+            <summary>
+            Empty generator. Note that empty generators will not function correctly. The
+            empty constructor is used internally.
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ACommentableGenerator.GenerateComment">
+            <summary>
+            If a comment has been supplied, generates the comment
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ACommentableGenerator.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct ACommentableGenerator. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ACommentableGenerator.Generate_Comment``1">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.ACommonCSharpGenerator">
+            <summary>
+            A generator that can have comments, attributes and keywords
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ACommonCSharpGenerator.#ctor">
+            <summary>
+            Empty generator. Note that empty generators will not function correctly. The
+            empty constructor is used internally.
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ACommonCSharpGenerator.GenerateAttributes">
+            <summary>
+            Generates attributes supplied
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.ACommonCSharpGenerator.Keywords">
+            <summary>
+            Keywords proceeding enum
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ACommonCSharpGenerator.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct AAttributeableGenerator. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ACommonCSharpGenerator.Generate_Attribute``1">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ACommonCSharpGenerator.Add_Keywords(HexCS.Data.Generation.CSharp.EKeyword[])">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.AFileGenerator">
+            <summary>
+            A generator that automatically generate the output to a file when
+            Generate is called (unless to surpress file generation flag is true)
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AFileGenerator.#ctor">
+            <summary>
+            Empty generator. Note that empty generators will not function correctly. The
+            empty constructor is used internally.
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AFileGenerator.WriteToFile(System.String)">
+            <summary>
+            Writes the generated string to a file if the Path property of 
+            this class is valid. Note, this will override ecisting files.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.AFileGenerator.SupressFileGeneration">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.AFileGenerator.Path">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.AFileGenerator.Encoding">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AFileGenerator.#ctor(System.Text.StringBuilder,Hex.Paths.PathString,System.Text.Encoding)">
+            <summary>
+            Construct ACommentableGenerator. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+            <param name="path">output path, null path will not write to path</param>
+            <param name="encoding">encoding, null will default to UTF8</param>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.AGenericTypeGenerator">
+            <summary>
+            A generator that can have comments, attributes and keywords
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AGenericTypeGenerator.#ctor">
+            <summary>
+            Empty generator. Note that empty generators will not function correctly. The
+            empty constructor is used internally.
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.AGenericTypeGenerator.GenericTypes">
+            <summary>
+            Collection containing generic types
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AGenericTypeGenerator.GenerateWhereConstraints(HexCS.Data.Generation.CSharp.AGenericTypeGenerator)">
+            <summary>
+            Generates where contrains in the format a class would normally take. 
+            This means that the indent is increased by one and each where contraint is
+            printed on it's own line
+            
+               where T : IList
+               where T2 : ICollection
+            </summary>
+            <param name="generator"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AGenericTypeGenerator.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct AAttributeableGenerator. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AGenericTypeGenerator.Add_GenericTypes(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AGenericTypeGenerator.Add_GenericTypeConstraints(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.AInheritableGenerator">
+            <summary>
+            A generator that can have comments, attributes and keywords
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AInheritableGenerator.#ctor">
+            <summary>
+            Empty generator. Note that empty generators will not function correctly. The
+            empty constructor is used internally.
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.AInheritableGenerator.Inheritances">
+            <summary>
+            Collection containing Inheritance types supplied to the generator
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AInheritableGenerator.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct AAttributeableGenerator. Generators require an output StringBuilder (that will be generated to).
+            </summary>
+            <param name="output">StringBuilder Generate() will output to</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.AInheritableGenerator.Add_Inheritances(System.String[])">
+            <inheritcdoc />
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.ICommentableGenerator">
+            <summary>
+            A generator that allows the user to supply an xml comment
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ICommentableGenerator.Generate_Comment``1">
+            <summary>
+            Returns a comment generator so that a comment can be added. 
+            Multiple calls to this funciton will override previous comments
+            </summary>
+            <returns>Comment Generator</returns>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.ICommonCSharpGenerator">
+            <summary>
+            A generator that allows comments and attributes to be applied
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ICommonCSharpGenerator.Generate_Attribute``1">
+            <summary>
+            Returns an attribute generator so that attributes can be applied
+            </summary>
+            <returns>Attribute Generator</returns>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.ICommonCSharpGenerator.Add_Keywords(HexCS.Data.Generation.CSharp.EKeyword[])">
+            <summary>
+            Add keywords to the generator
+            </summary>
+            <param name="keywords">keywords to add</param>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IFileGenerator">
+            <summary>
+            A generator that allows the user to supply an xml comment
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.IFileGenerator.SupressFileGeneration">
+            <summary>
+            If true, the FileGenerator will not output to a file
+            when Generate() is called
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Generation.CSharp.IFileGenerator.Path">
+            <summary>
+            The path to the file that should be written to. 
+            NOTE: the file will automatically be overriden if it exists
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IGenericTypeGenerator">
+            <summary>
+            A generator that allows comments and attributes to be applied
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.IGenericTypeGenerator.Add_GenericTypes(System.String[])">
+            <summary>
+            Add a generic type to this generator
+            </summary>
+            <param name="types">type to add</param>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.IGenericTypeGenerator.Add_GenericTypeConstraints(System.String[])">
+            <summary>
+            Add a generic type 'where'constraint
+            </summary>
+            <param name="constraints">constraint to add, without the where keyword</param>
+        </member>
+        <member name="T:HexCS.Data.Generation.CSharp.IInheritableGenerator">
+            <summary>
+            A generator that allows comments and attributes to be applied
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.CSharp.IInheritableGenerator.Add_Inheritances(System.String[])">
+            <summary>
+            Add inheritance types to the generator
+            </summary>
+            <param name="inheritanceTypes"></param>
+        </member>
+        <member name="T:HexCS.Data.Generation.Json.GTList">
+            <summary>
+            Generates a Json list
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Json.GTList.List">
+            <summary>
+            The object to generate
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTList.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct a GTList to take some primative as an object and 
+            </summary>
+            <param name="sb"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTList.#ctor">
+            <summary>
+            Empty for internal purposes
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTList.SetRequired(System.Collections.Generic.List{System.Object})">
+            <summary>
+            Set required fields
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTList.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Generation.Json.GTObject">
+            <summary>
+            Generates a Json list
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Json.GTObject.Obj">
+            <summary>
+            The object to generate
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTObject.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct a GTObject to take some primative as an object and 
+            </summary>
+            <param name="sb"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTObject.#ctor">
+            <summary>
+            Empty for internal purposes
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTObject.SetRequired(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Set required fields
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTObject.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Generation.Json.GTPrimative">
+            <summary>
+            Generates a Json primative
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Json.GTPrimative.Primative">
+            <summary>
+            The object to generate
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTPrimative.#ctor(System.Text.StringBuilder,System.Object)">
+            <summary>
+            Construct a GTPrimative to take some primative as an object and 
+            </summary>
+            <param name="sb"></param>
+            <param name="primative"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTPrimative.#ctor">
+            <summary>
+            Empty for internal purposes
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTPrimative.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Generation.Json.GTSerializationFile">
+            <summary>
+            Generates a Json file starting with %Json 1.2 and enclosing file in
+            ---, ...
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Json.GTSerializationFile.Objects">
+            <summary>
+            The objects to write to the Json file
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTSerializationFile.#ctor(System.Text.StringBuilder,System.Collections.Generic.KeyValuePair{System.String,System.Object}[])">
+            <summary>
+            Construct generator
+            </summary>
+            <param name="sb"></param>
+            <param name="objects"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTSerializationFile.#ctor">
+            <summary>
+            Empty, for internal purposes
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Json.GTSerializationFile.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Generation.Yaml.GTIDataFile">
+            <summary>
+            Generates a Yaml file starting with %YAML 1.2 and enclosing file in
+            ---, ...
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Yaml.GTIDataFile.Data">
+            <summary>
+            The objects to write to the YAML file
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTIDataFile.#ctor(System.Text.StringBuilder,HexCS.Data.Runtime.IData)">
+            <summary>
+            Construct generator
+            </summary>
+            <param name="sb"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTIDataFile.#ctor">
+            <summary>
+            Empty, for internal purposes
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTIDataFile.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Generation.Yaml.GTInterField">
+            <summary>
+            Generates a YAML list
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Yaml.GTInterField.AppendNewLine">
+            <summary>
+            If true, appends new line after generating object
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Yaml.GTInterField.FieldIsListElement">
+            <summary>
+            If true, treats the field as a list element, 
+            which has different generation rules
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Yaml.GTInterField.SupressIndent">
+            <summary>
+            if true, surpresses the indent of a field name
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Yaml.GTInterField.Field">
+            <summary>
+            The object to generate
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTInterField.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct a GTObject to take some primative as an object and 
+            </summary>
+            <param name="sb"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTInterField.#ctor">
+            <summary>
+            Empty for internal purposes
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTInterField.SetRequired(HexCS.Data.Runtime.InterField)">
+            <summary>
+            Set required fields
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTInterField.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Generation.Yaml.GTList">
+            <summary>
+            Generates a YAML list
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Yaml.GTList.List">
+            <summary>
+            The object to generate
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTList.#ctor(System.Text.StringBuilder)">
+            <summary>
+            Construct a GTList to take some primative as an object and 
+            </summary>
+            <param name="sb"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTList.#ctor">
+            <summary>
+            Empty for internal purposes
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTList.SetRequired(HexCS.Data.Runtime.InterField)">
+            <summary>
+            Set required fields
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTList.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Generation.Yaml.GTPrimative">
+            <summary>
+            Generates a YAML primative
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Generation.Yaml.GTPrimative.Primative">
+            <summary>
+            The object to generate
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTPrimative.#ctor(System.Text.StringBuilder,System.Object)">
+            <summary>
+            Construct a GTPrimative to take some primative as an object and 
+            </summary>
+            <param name="sb"></param>
+            <param name="primative"></param>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTPrimative.#ctor">
+            <summary>
+            Empty for internal purposes
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Generation.Yaml.GTPrimative.Generate">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Parsing.CSVParser`1">
+            <summary>
+            Parses each element of a CSV using a Parser
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+        </member>
+        <member name="F:HexCS.Data.Parsing.CSVParser`1.ElementParser">
+            <summary>
+            Parser uses to parse each element of the csv
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Parsing.CSVParser`1.#ctor(HexCS.Data.Parsing.IParser{`0})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="parser">Parser used to parse each elemetn in the CSV</param>
+        </member>
+        <member name="M:HexCS.Data.Parsing.CSVParser`1.Interpret(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Parsing.Parsers.RowParserIDataYaml">
+            <summary>
+            Parses a YamlFile in 
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Parsers.RowParserIDataYaml.Interpret(System.String[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Parsing.Parsers.Yaml.RowParserYamlObject">
+            <summary>
+            Parses a single YamlObject, expecting that all provided rows are a
+            trimed yaml object. 
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Parsers.Yaml.RowParserYamlObject.Interpret(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Parsing.TrimParser">
+            <summary>
+            Takes a string a trims it
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:HexCS.Data.Parsing.TrimParser.Interpret(System.String)" -->
+        <member name="T:HexCS.Data.Parsing.TypeNameParser">
+            <summary>
+            Takes a string of pattern [TYPE] NAME and outputs a TypeName object
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.TypeNameParser.cInvalid">
+            <summary>
+            string given to invalid parse units
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Parsing.TypeNameParser.Interpret(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Parsing.TypeNameParser.TypeName">
+            <summary>
+            A type and a name
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.TypeNameParser.TypeName.Type">
+            <summary>
+            The type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.TypeNameParser.TypeName.Name">
+            <summary>
+            The Name
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Parsing.Yaml.YamlParser">
+            <summary>
+            <para>The Tobias YAML Parser is not designed to parse the entire yaml spec, rather it 
+            is designed to parser a stricter subset. As time goes on I'll increase the features but for my
+            current needs, I just want somethin that works and is human readable. </para>
+            
+            <para>The parser works by stepping forward in the yaml parse string as a large array. I've
+            minimize string copies as much as possible for efficientcy. As time goes on I will improve this parser, 
+            So I've written a few tests with examples</para>
+            
+            <para> A quick explainaiton of the spec: Files always use the YAML --- and *** end line characters. There are three
+            types of elements: Objects, Dictionaries and Lists. Objects are key:value. Lists are value[]. Dictionary are 
+            key:value[]</para>
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.Yaml.YamlParser.cYamlStartFileToken">
+            <summary>
+            character used for start block in yaml
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.Yaml.YamlParser.cYamlStartFileTokenQuery">
+            <summary>
+            Char query used to query string index for yaml start of file token
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.Yaml.YamlParser.cYamlEndFileToken">
+            <summary>
+            character used for start block in yaml
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.Yaml.YamlParser.cYamlEndFileTokenQuery">
+            <summary>
+            Char query used to query string index for yaml start of file token
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.Yaml.YamlParser.cYamlTab">
+            <summary>
+            String representing yaml tab
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.Yaml.YamlParser.cYamlObjectToken">
+            <summary>
+            Char token used to detect yaml objects
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.Yaml.YamlParser.cYamlListToken">
+            <summary>
+            Char token used to detect yaml lists
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Parsing.Yaml.YamlParser.cYamlCommentToken">
+            <summary>
+            Char token used to detect yaml comment
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.Interpret(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ParseDictionaryBlock(System.String@,System.Int32@,System.Int32)">
+            <summary>
+            Dictionaries are a same depth collection of objects. Blank lines are skipped. End line
+            stops process. index should start at first line of dictionary. ends on line after completed
+            DictionaryBlock.
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="depth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ParseObjectBlock(System.String@,System.Int32@,System.Int32)">
+            <summary>
+            Parses an Object Block at a depth. Assumes that index is at the start of the object block line.
+            Should end on line following block
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="depth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ParseObjectBlockLine(System.String@,System.Int32@,System.Boolean@,System.Int32)">
+            <summary>
+            Expects the index after the object colon. Handles the resolution of the object at block depth.
+            After resolution automatically moves to next line. This is true if the object is a one liner
+            or multi liner object
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="depth"></param>
+            <param name="isArray"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ParseListBlock(System.String@,System.Int32@,System.Int32)">
+            <summary>
+            Assumes start of line for a list block. parses the block and ends at the start of the preceeding line
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="depth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ParseListValue(System.String@,System.Int32@,System.Int32)">
+            <summary>
+            Expects index after - character. Automatically moves to next line
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="depth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.DetectIsBlankLine(System.String@,System.Int32)">
+            <summary>
+            Detect if this line is a blank line. BLank lines don't break blocks. 
+            Lines that only contain comments are also considered blank lines
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.DetectObjectNestedType(System.String@,System.Int32)">
+            <summary>
+            Assumes index is at line after object declarion of a nested object. Without moving
+            index, detects the object type (list or dictionary)
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.DetectDepth(System.String@,System.Int32)">
+            <summary>
+            Without moving the index, detects the depth of the line by counting the
+            tabs and detecting if a - exists (because list elements have + 1 for the - character)
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="tabs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.DetectObjectUntilEndLine(System.String@,System.Int32)">
+            <summary>
+            Detects if an object is present in the line
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.DetectListUntilEndLine(System.String@,System.Int32)">
+            <summary>
+            Detects if an object is present in the line
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.DetectEndOfFile(System.String@,System.Int32)">
+            <summary>
+            Detects forward to the next newline character and if it finds the end of file ***
+            before that, return true
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ExtractValue(System.String@,System.Int32@,System.Int32@)">
+            <summary>
+            populates startIndex with the startinf index of the value, and index with the end index.
+            Returns false if index not found. 
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="startIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ExtractObjectKey(System.String@,System.Int32@,System.Int32@)">
+            <summary>
+            Starting from index, updates the startindex and index variables to start and end of key.
+            False if no key found. Assumes ke yis somewhere on same line as index at some greater index
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <param name="startIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ScanForValueStart(System.String@,System.Int32@)">
+            <summary>
+            Moves the index to the first non-whitespace character or returns false if newline is found before
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ScanForListCharacter(System.String@,System.Int32@)">
+            <summary>
+            Moves the index to the next -, or returns false if no colon exists before a newline
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ScanToNextObjectLine(System.String@,System.Int32@)">
+            <summary>
+            Moves index to next line containing an object
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ScanForObjectColon(System.String@,System.Int32@)">
+            <summary>
+            Moves the index to the next :, or returns false if no colon exists before a newline
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ScanYamlTabDepth(System.String@,System.Int32@)">
+            <summary>
+            Moves the index passed all occurences of ' '' ' and returns the number of tabs passed
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Parsing.Yaml.YamlParser.ScanToFirstYamlLine(System.String@,System.Int32@)">
+            <summary>
+            Moves the index to the NewlineStart after the YamlFileStart characters
+            </summary>
+            <param name="s"></param>
+            <param name="index"></param>
+        </member>
+        <member name="T:HexCS.Data.Parsing.IDataParser">
+            <summary>
+            Used to parse some string into a KeyValuePair[string, object][]
+            type. This is used to traslate between parse types into C# objects. 
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Parsing.IInterpreter`2">
+            <summary>
+            Interpretation units take some input element TInput and translate them to TOutput. 
+            This is basically a single iteration of a transformation step over some data.
+            </summary>
+            <typeparam name="TInput">Input type</typeparam>
+            <typeparam name="TOutput">Output type</typeparam>
+        </member>
+        <member name="M:HexCS.Data.Parsing.IInterpreter`2.Interpret(`0)">
+            <summary>
+            Interprets the input as an output
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Parsing.IParser`1">
+            <summary>
+            Parser for some string to output object
+            </summary>
+            <typeparam name="TOutput"></typeparam>
+        </member>
+        <member name="T:HexCS.Data.Parsing.IRowParser`1">
+            <summary>
+            Parses a row of strings
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Persistence.DataLibrary`1">
+            <summary>
+            TTypeEnum enumerate all types present in library
+            </summary>
+            <typeparam name="TFileTypeEnum"></typeparam>
+        </member>
+        <member name="P:HexCS.Data.Persistence.DataLibrary`1.Root">
+            <summary>
+            The Root library folder
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Persistence.DataLibrary`1.#ctor(Hex.Paths.PathString)">
+            <summary>
+            Make a data library wiht some root
+            </summary>
+            <param name="root"></param>
+        </member>
+        <member name="M:HexCS.Data.Persistence.DataLibrary`1.RefreshFolders">
+            <summary>
+            Checks the Root folder, makes sure folders exist for each enum
+            and populates file pointers.
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Persistence.DataLibrary`1.RefreshAllFiles">
+            <summary>
+            Refresh all file types in library
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Persistence.DataLibrary`1.RefreshFiles(`0)">
+            <summary>
+            Refreshs the files in the libary
+            </summary>
+            <param name="fileType"></param>
+        </member>
+        <member name="M:HexCS.Data.Persistence.DataLibrary`1.GetFiles(`0,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="fileType"></param>
+            <param name="autoRefresh"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Persistence.DataLibrary`1.WriteFile(System.Byte[],`0)">
+            <summary>
+            Writes a file to the dataLibrary
+            </summary>
+            <param name="fileType"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:HexCS.Data.Persistence.DataLibrary`1.Clear">
+            <summary>
+            Removes all files from folders
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Persistence.FileAppender`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Persistence.FileAppender`1.EnqueueObject(`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Persistence.IFileAppender`1">
+            <summary>
+            File appenders can open or create a file and continously append information to it. 
+            </summary>
+            <typeparam name="TObj"></typeparam>
+        </member>
+        <member name="M:HexCS.Data.Persistence.IFileAppender`1.EnqueueObject(`0)">
+            <summary>
+            Queue object for writting
+            </summary>
+            <param name="ob"></param>
+        </member>
+        <member name="M:HexCS.Data.Persistence.IFileLoader`1.LoadFile(System.IO.FileInfo)">
+            <summary>
+            Load file to runtime type T
+            </summary>
+            <param name="path">Path to file</param>
+            <returns>Loaded file</returns>
+        </member>
+        <member name="T:HexCS.Data.Persistence.IFileManager`1">
+            <summary>
+            Handles logic to Save, Load and Create Empty persisted files
+            of an object
+            </summary>
+            <typeparam name="T">Object to Save, Load and Create Empty</typeparam>
+        </member>
+        <member name="M:HexCS.Data.Persistence.IFileManager`1.CreateEmpty(System.IO.FileInfo)">
+            <summary>
+            Creates and saves a file representing an empty object
+            Used to create initial files in some situations. 
+            </summary>
+            <param name="file">Path to file</param>
+            <returns>True is successfully created</returns>
+        </member>
+        <member name="M:HexCS.Data.Persistence.IFileSaver`1.SaveFile(`0,System.IO.FileInfo)">
+            <summary>
+            Save obj to a file
+            </summary>
+            <param name="obj">Object to save to file</param>
+            <param name="file_name">Name of the file without extention</param>
+            <param name="path">Path to directory in which to save file</param>
+            <param name="force_extension">if not null, will replace default file extension</param>
+        </member>
+        <member name="T:HexCS.Data.Persistence.IStreamAppender`1">
+            <summary>
+            Appends object to a stream
+            </summary>
+            <typeparam name="TObj">Object to append</typeparam>
+        </member>
+        <member name="T:HexCS.Data.Persistence.UTCommonPaths">
+            <summary>
+            Utility that contains useful paths used for testing
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Persistence.UTCommonPaths.AppDataPath">
+            <summary>
+            Absolute path to the location on the folder on this PC
+            where application data can be used. This is useful for 
+            many things, like caching app data between sessinos or making
+            tempory folders for testing purposes.
+            
+            Note: null if something fails in path resolution
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Persistence.UTDirectoryInfo">
+            <summary>
+            Class containing general useful functions for paths
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTDirectoryInfo.ExistsOrCreate(System.IO.DirectoryInfo)">
+            <summary>
+            Checks if a Directory exists, if it doesn't create it
+            </summary>
+            <param name="directory">Path to check or create</param>
+            <returns>true if directory exists</returns>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTDirectoryInfo.DeleteThenCreate(System.IO.DirectoryInfo)">
+            <summary>
+            If Directory already exists, deletes directory then creates an empty one
+            </summary>
+            <param name="directory">Path to directory to create</param>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTDirectoryInfo.DirectoryContains(System.IO.DirectoryInfo,System.String[])">
+            <summary>
+            Checks if directory contains all files in file names
+            </summary>
+            <param name="directory"></param>
+            <param name="fileNames"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Persistence.UTFileInfo">
+            <summary>
+            General utilities foe FIleInfo objects
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTFileInfo.ExistsOrCreate(System.IO.FileInfo)">
+            <summary>
+            Checks if a File exists, if it doesn't funciton creates it
+            </summary>
+            <param name="file"></param>
+            <returns>True if file previously existed</returns>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTFileInfo.ForceEmptyOrCreate(System.IO.FileInfo)">
+            <summary>
+            Checks if a File exists, if it doesn't funciton creates it.
+            If it does, delete everything inside it
+            </summary>
+            <param name="file"></param>
+            <returns>True if file previously existed</returns>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTFileInfo.ReadAllText(System.IO.FileInfo)">
+            <summary>
+            Opens a file and returns text as a string
+            </summary>
+            <param name="file">File to Read from</param>
+            <returns>string read from file</returns>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTFileInfo.ReadAllLines(System.IO.FileInfo)">
+            <summary>
+            <para>Reads a file info file line by line and returns a string[].</para>
+            <para>The current implementation
+            uses a list so creates some garbage which may not be ideal if this is called often. </para>
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTFileInfo.WriteString(System.IO.FileInfo,System.String,System.Text.Encoding)">
+            <summary>
+            Write a string to a file
+            </summary>
+            <param name="text">string to write</param>
+            <param name="file">file to write to</param>
+            <param name="encoding">encoding of string</param>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTFileInfo.WriteBytes(System.IO.FileInfo,System.Byte[])">
+            <summary>
+            Write a byte[] to a file
+            </summary>
+            <param name="data">string to write</param>
+            <param name="file">file to write to</param>
+        </member>
+        <member name="T:HexCS.Data.Persistence.UTFileStream">
+            <summary>
+            General utilities for file stream objects
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Persistence.UTFileStream.WriteString(System.IO.FileStream,System.String,System.Text.Encoding)">
+            <summary>
+            Write a string to a file using a pre opened stream. Does not dispose
+            </summary>
+            <param name="text">string to write</param>
+            <param name="stream">stream to write to</param>
+            <param name="encoding">endoing</param>
+        </member>
+        <member name="T:HexCS.Data.Runtime.AData">
+            <summary>
+            IData base class. Simplify implementation of IData objects
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Runtime.AData.DataLayout">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Runtime.AData.ConvertToIntermediate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Runtime.AData.GetIntermediateFields">
+            <summary>
+            Return the interfields required to convert this IData to an
+            intermediate InterObject
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.AData.TryConstructFromIntermediate(HexCS.Data.Runtime.InterObject)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Runtime.AData.TryConstructAfterValidation(HexCS.Data.Runtime.InterField[])">
+            <summary>
+            Validation is applied automatically, by AData. Children need
+            to attempt to construct themselves from the provided fields
+            </summary>
+            <param name="fields"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Runtime.DataArray">
+            <summary>
+            Generic version of a data array
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.DataArray.ElementName">
+            <summary>
+            Name of elemnt type used for IData
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Runtime.DataArray.Length">
+            <summary>
+            Length of the data array
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Runtime.DataArray.GenericData">
+            <summary>
+            Data in the data array
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Runtime.DataArray.DataLayout">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Data.Runtime.DataArray.ArrayType">
+            <summary>
+            The Type of the elements in the list
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray.ConvertToIntermediate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray.TryConstructFromIntermediate(HexCS.Data.Runtime.InterObject)">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray.StringArray(System.String[])">
+            <summary>
+            Return a String DataArray Object
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray.IntArray(System.Int32[])">
+            <summary>
+            Return a int DataArray Object
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray.FloatArray(System.Single[])">
+            <summary>
+            Return a float DataArray Object
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray.BoolArray(System.Boolean[])">
+            <summary>
+            Return a bool DataArray Object
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray.AutoArray(System.Object[])">
+            <summary>
+            Return a bool DataArray Object
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray.IDataArray``1(``0[])">
+            <summary>
+            Return a IData DataArray Object
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Runtime.DataArray`1">
+            <summary>
+            Used to convert list into intemediate type and back from it
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Runtime.DataArray`1.GenericData">
+            <inheritdoc/>
+        </member>
+        <member name="P:HexCS.Data.Runtime.DataArray`1.Data">
+            <summary>
+            Data in the data array
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Runtime.DataArray`1.DataLayout">
+            <inheritdoc />
+        </member>
+        <member name="P:HexCS.Data.Runtime.DataArray`1.ListType">
+            <summary>
+            The Type of the elements in the list
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray`1.#ctor(`0[],HexCS.Data.Runtime.EDataType,System.String)">
+            <summary>
+            Can be used to construct data array. Should use DataArray.Array calls instead.
+            </summary>
+            <param name="data"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray`1.ConvertToIntermediate">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Runtime.DataArray`1.TryConstructFromIntermediate(HexCS.Data.Runtime.InterObject)">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Runtime.EDataType">
+            <summary>
+            Data types that are supported by the HexCS data
+            intemediate type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.EDataType.Bool">
+            <summary>
+            Boolean type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.EDataType.Int">
+            <summary>
+            Integer Type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.EDataType.Float">
+            <summary>
+            Float Type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.EDataType.String">
+            <summary>
+            String type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.EDataType.Data">
+            <summary>
+            Nested IData type
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.EDataType.Auto">
+            <summary>
+            The type must be inferred somehow. Normally during IData
+            TryConstructFromIntermediate
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Runtime.UTESupportedData">
+            <summary>
+            Utility methods used with ESupportData
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Runtime.UTESupportedData.TryParseInt(System.Object,System.Int32@)">
+            <summary>
+            Try and parse object as an int
+            </summary>
+            <param name="obj"></param>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Runtime.IData">
+            <summary>
+            All objects that are compatible with HexCS.Data serialization
+            techniques must inherit the IData interface, which exposes methods for transforming
+            the runtime object into an intemediate type. 
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Runtime.IData.DataLayout">
+            <summary>
+            <para>DataLayout corresponds wtih the KeyValuePair`string, object>[]` output by the 
+            ConvertToIntermediate function. When outputting the intermidate type, each element
+            intemerdiate[i] should correspond to the DataLayout[i]. This facilitates conversion.
+            TryConstructFromIntermediate will use this infomation to deserialize the intemediate.</para>
+            
+            
+            <para>DataLayout does not follow data during conversion.</para>
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Runtime.IData.ConvertToIntermediate">
+            <summary>
+            Used to express the current runtime object as a KeyValuePair[],
+            the intemediate type used in all HexCS.Data serialization
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.IData.TryConstructFromIntermediate(HexCS.Data.Runtime.InterObject)">
+            <summary>
+            Used to construct an instance of the object from intermediate data.
+            If true, the object this is called upon will contain data as if it were
+            constructed from the intermediate type
+            </summary>
+            <param name="intermediate"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Runtime.InterField">
+            <summary>
+            InterFields represent the fields of an object that you are parsing. 
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.InterField.Name">
+            <summary>
+            Name of the field. If null, then the name must be interered some how. 
+            Normally name interfence happens during IData TryConstruct from intermediate
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.InterField.Type">
+            <summary>
+            The type of the inter object
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.InterField.Object">
+            <summary>
+            The object data
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.InterField.IsArray">
+            <summary>
+            Is this an array field. If so, then the type is the type of
+            every element in the field
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.Bool(System.Boolean,System.String)">
+            <summary>
+            Convert string to InterObject
+            </summary>
+            <param name="ob"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsBool(System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.op_Implicit(System.Boolean)~HexCS.Data.Runtime.InterField">
+            <summary>
+            Implicit cast string to interobject
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.BoolList(System.Collections.Generic.List{System.Boolean},System.String)">
+            <summary>
+            Convert IData to InterObject
+            </summary>
+            <param name="list"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsBoolList(System.Collections.Generic.List{System.Boolean}@)">
+            <summary>
+            
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.String(System.String,System.String)">
+            <summary>
+            Convert string to InterObject
+            </summary>
+            <param name="ob"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsString(System.String@)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.op_Implicit(System.String)~HexCS.Data.Runtime.InterField">
+            <summary>
+            Implicit cast string to interobject
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.StringList(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Convert IData to InterObject
+            </summary>
+            <param name="list"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsStringList(System.Collections.Generic.List{System.String}@)">
+            <summary>
+            
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.Int(System.Int32,System.String)">
+            <summary>
+            Convert int to InterObject
+            </summary>
+            <param name="ob"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsInt(System.Int32@)">
+            <summary>
+            
+            </summary>
+            <param name="integer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.op_Implicit(System.Int32)~HexCS.Data.Runtime.InterField">
+            <summary>
+            Implicit cast str to interobject
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.IntList(System.Collections.Generic.List{System.Int32},System.String)">
+            <summary>
+            Convert IData to InterObject
+            </summary>
+            <param name="list"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsIntList(System.Collections.Generic.List{System.Int32}@)">
+            <summary>
+            
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.Float(System.Single,System.String)">
+            <summary>
+            Convert float to InterObject
+            </summary>
+            <param name="ob"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsFloat(System.Single@)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.op_Implicit(System.Single)~HexCS.Data.Runtime.InterField">
+            <summary>
+            Implicit cast float to interobject
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.FloatList(System.Collections.Generic.List{System.Single},System.String)">
+            <summary>
+            Convert IData to InterObject
+            </summary>
+            <param name="list"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsFloatList(System.Collections.Generic.List{System.Single}@)">
+            <summary>
+            
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.GenericDataArray(HexCS.Data.Runtime.EDataType,HexCS.Data.Runtime.DataArray,System.String)">
+            <summary>
+            Generic Data array normally used by more concrete funcitons like IntList
+            </summary>
+            <param name="type"></param>
+            <param name="data"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.Data(HexCS.Data.Runtime.IData,System.String)">
+            <summary>
+            Convert IData to InterObject
+            </summary>
+            <param name="ob"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.DataList``1(System.Collections.Generic.List{``0},System.String)">
+            <summary>
+            Convert IData to InterObject
+            </summary>
+            <param name="list"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsIData``1(``0@)">
+            <summary>
+            Try return field object as an unpacked IData
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.Custom(System.Object,HexCS.Data.Runtime.EDataType,System.String)">
+            <summary>
+            Convert IData to InterObject
+            </summary>
+            <param name="ob"></param>
+            <param name="name"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.Auto(System.Object,System.Boolean,System.String)">
+            <summary>
+            Convert IData to InterObject
+            </summary>
+            <param name="ob"></param>
+            <param name="isArray"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsPrimativeList``1(System.Collections.Generic.List{``0}@,System.Func{System.String,``0})">
+            <summary>
+            Try to interpret a field as a list. The Parse function is used
+            to convert Auto type fields full of strings
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="parse"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsIDataList``1(System.Collections.Generic.List{``0}@)">
+            <summary>
+            Try to interpret a field as a list of IData objects
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsInterObject(HexCS.Data.Runtime.InterObject@)">
+            <summary>
+            Try to interpret this field as an InterObject. Mostly used internally.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsDataArray(HexCS.Data.Runtime.DataArray@)">
+            <summary>
+            Try to interpret this field as an InterObject. Mostly used internally.
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsObject(HexCS.Data.Runtime.InterObject@)">
+            <summary>
+            Convert InterField into Interfield[].
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.Equals(System.Object)">
+            <summary>
+            
+            </summary>t
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterField.TryAsPrimative``1(``0@,System.Func{System.String,``0})">
+            <summary>
+            Try to get a field as some primatve values
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="primative"></param>
+            <param name="parse"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Runtime.InterObject">
+            <summary>
+            Intermediate type representation of some IData object. Objects contain 
+            fields, which are essentially named values
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.InterObject.Name">
+            <summary>
+            Required for InterObjects which represent IData. Needed 
+            to have an object name for list elements
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Runtime.InterObject.Fields">
+            <summary>
+            Fields contained within the object. These are named fields,
+            put order alos matters. The field names are present for generation
+            of serializaiton files. Order is required for generic deserialization
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterObject.#ctor(HexCS.Data.Runtime.InterField[])">
+            <summary>
+            Construct InterObject
+            </summary>
+            <param name="fields"></param>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterObject.#ctor(System.String,HexCS.Data.Runtime.InterField[])">
+            <summary>
+            Construct InterObject
+            </summary>
+            <param name="fields"></param>
+            <param name="typeName"></param>
+        </member>
+        <member name="M:HexCS.Data.Runtime.InterObject.Equals(System.Object)">
+            <summary>
+            Checks equality based on object only, not names
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Runtime.UTIData">
+            <summary>
+            Utility functions related to IDataObjects
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Runtime.UTIData.ValidateDataLayout(HexCS.Data.Runtime.IData,HexCS.Data.Runtime.InterField[])">
+            <summary>
+            Returns true if the fields object is valid to construct to target IData
+            </summary>
+            <param name="data"></param>
+            <param name="fields"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Serialization.ESerializationFormat">
+            <summary>
+            The format used to generate the serailized output
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Serialization.ESerializationFormat.Packet">
+            <summary>
+            This will pack the data as much as possible, eliminating useless whitespace and
+            unneeded data like keys
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Serialization.ESerializationFormat.Human">
+            <summary>
+            This will serialize into a human readable format
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Serialization.ESerializationSyntax">
+            <summary>
+            The type of file to serialize the object to
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Serialization.ESerializationSyntax.Binary">
+            <summary>
+            001010100010011
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Serialization.ESerializationSyntax.XML">
+            <summary>
+            Can't write example cause the syntax is same as the comments
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Serialization.ESerializationSyntax.JSON">
+            <summary>
+            { "name" : "value" }
+            </summary>
+        </member>
+        <member name="F:HexCS.Data.Serialization.ESerializationSyntax.YAML">
+            <summary>
+            name
+              - value1
+              - value2
+            </summary>
+        </member>
+        <member name="T:HexCS.Data.Serialization.IGenericSerializer">
+            <summary>
+            An IGenericSerializer is capable of serializing data into and of the supported
+            ESerializationFormats in any ESerailizationType
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Serialization.IGenericSerializer.SetSyntax(HexCS.Data.Serialization.ESerializationSyntax)">
+            <summary>
+            Set the format that should be used by the serializer
+            </summary>
+            <param name="format"></param>
+        </member>
+        <member name="T:HexCS.Data.Serialization.ISyntaxSerializer">
+            <summary>
+            An ISerializer is capable of serializing data into and of the supported
+            ESerializationFormats in any ESerailizationType
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Serialization.ISyntaxSerializer.Format">
+            <summary>
+            The Format to use when serializing. Autodetected when deserializing
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Serialization.ISyntaxSerializer.Syntax">
+            <summary>
+            The Serialization type to use when serializing. Autodetected when deserializing
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Serialization.ISyntaxSerializer.Serialize(HexCS.Data.Runtime.IData)">
+            <summary>
+            Serializes the provided intermediate into data. Uses Format and Type
+            to determine output
+            </summary>
+            <param name="intermediate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Serialization.ISyntaxSerializer.Deserialize``1(System.Byte[])">
+            <summary>
+            Converts data to the intermediate type. This method should autodetect the Syntax and Format.
+            Syntax is based on the serialization indicator character first byte. The Format is based on
+            the first argument deserialized from the object which is type dependent
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Serialization.Serializer">
+            <summary>
+            Serialization managment class that handles serialization to multiple different types
+            based on a common intermediate type. Set the Format and Type to customize the way
+            serialization is performed. All string serialization is utf8.
+            </summary>
+        </member>
+        <member name="P:HexCS.Data.Serialization.Serializer.Format">
+            <inheritdoc/>
+        </member>
+        <member name="P:HexCS.Data.Serialization.Serializer.Syntax">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Serialization.Serializer.Serialize(HexCS.Data.Runtime.IData)">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Serialization.Serializer.Deserialize``1(System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:HexCS.Data.Serialization.Serializer.SetSyntax(HexCS.Data.Serialization.ESerializationSyntax)">
+            <inheritdoc/>
+        </member>
+        <member name="T:HexCS.Data.Serialization.SerializerYaml">
+            <summary>
+            Can Serialize and Deserialize YAML
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Serialization.SerializerYaml.Deserialize``1(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="M:HexCS.Data.Serialization.SerializerYaml.Serialize(HexCS.Data.Runtime.IData)">
+            <inheritdoc />
+        </member>
+        <member name="T:HexCS.Data.Serialization.UTXElement">
+            <summary>
+            Contains useful utilities for work with Linq XML
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Serialization.UTXElement.GetAttributeOrDefault(System.Xml.Linq.XElement,System.Xml.Linq.XName,System.String)">
+            <summary>
+            Gets the value of an attribute or returns a 
+            default value if the attribute cannot be found
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Serialization.UTXElement.GetAttributeOrError(System.Xml.Linq.XElement,System.Xml.Linq.XName)">
+            <summary>
+            Gets the value of an attribute or throws error
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Serialization.UTXElement.AddChild(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            Adds a child to the element and returns the new child
+            </summary>
+            <param name="target"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Serialization.ISimpleSerializable">
+            <summary>
+            <para>The .NET Binary serializer has a lot of features that are
+            resulting in code bulk. I need simple, featureless, lightweight
+            binary serialization that can be used to send simple messages.</para>
+            
+            <para>To do this, I am creating a SimpleSerializable inferface that
+            exposes the GetBytes() and ConstructFromBytes() functions</para>
+            
+            <para>In order to work, objects inheriting ISimpleSerializable
+            require a public default constructor, otherwise the instance
+            that is created will be completely override when calling
+            ConstructFromBytes()</para>
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Serialization.ISimpleSerializable.ConstructFromBytes(System.Byte[])">
+            <summary>
+            Use bytes to construct the class.
+            Should be called on a class created from
+            a default constructor
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Serialization.ISimpleSerializable.GetBytes">
+            <summary>
+            Return this class as a byte[], which
+            is a simple byte format for the class
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HexCS.Data.Serialization.UTSerialization">
+            <summary>
+            Serialization utilities, mstly for conerting to and from
+            byte[]s
+            </summary>
+        </member>
+        <member name="M:HexCS.Data.Serialization.UTSerialization.BinarySerialize``1(``0)">
+            <summary>
+            Uses a binary formatter to serailize target object to byte[]
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Serialization.UTSerialization.BinaryDeserialize``1(System.Byte[])">
+            <summary>
+            Uses a binary formatter to deserialize a byte[] to object
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Serialization.UTSerialization.DeserializeSimple``1(System.Byte[])">
+            <summary>
+            Deserializes an object of the ISimpleSerialiable interface
+            using a byte[]
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Serialization.UTSerialization.ToBytes(System.Int32[])">
+            <summary>
+            Converts an int[] array to bytes
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HexCS.Data.Serialization.UTSerialization.AsIntArray(System.Byte[])">
+            <summary>
+            Attempts to convert the byte[] into an int[]
+            </summary>
+            <param name="buffer"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

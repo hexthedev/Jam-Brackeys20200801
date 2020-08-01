@@ -1,0 +1,12 @@
+[submodule "HexUN"]
+	url = https://github.com/hexthedev/HexUN.git
+	path = Assets/Dependencies/HexUN
+	branch = refs/heads/master
+[submodule "HexUN-UXUI"]
+	url = https://github.com/hexthedev/HexUN-UXUI.git
+	path = Assets/Dependencies/HexUN-UXUI
+	branch = refs/heads/master
+[submodule "HexUN-Input"]
+	url = https://github.com/hexthedev/HexUN-Input.git
+	path = Assets/Dependencies/HexUN-Input
+	branch = refs/heads/master

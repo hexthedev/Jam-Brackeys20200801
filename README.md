@@ -1,2 +1,2 @@
-# Jam-Brackeys20200801
-Brackey's Game Jam 2020. Theme: Rewind
+# Brackeys 2020 : Rewind
+Making a game in a weke with the rewind theme
