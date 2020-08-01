@@ -26,7 +26,7 @@ namespace Game
             scale = Mathf.Clamp(scale, float.Epsilon, float.MaxValue);
 
             //Set up interpolation
-            IInterpolationToken t = InterpolationManager.Instance.StartInterpolation(
+            IInterpolationToken<float[]> t = InterpolationManager.Instance.StartInterpolation(
                 _inteprolationId,
                 EaseDuration,
                 new SInterpolation
