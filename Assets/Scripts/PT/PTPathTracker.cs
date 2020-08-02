@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PTPathTracker : MonoBehaviour
@@ -10,6 +11,8 @@ public class PTPathTracker : MonoBehaviour
 
     private Queue<PathPoint> _currentPath = new Queue<PathPoint>();
     private Transform _path;
+
+    public IEnumerable<Vector3> CurrentPath => _currentPath.Select(e => e.position);
 
     private void Start()
     {

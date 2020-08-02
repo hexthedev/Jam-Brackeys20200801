@@ -16,6 +16,9 @@ namespace PT
         [SerializeField]
         private Vector2ReliableEvent _onMoveEvent;
 
+        [SerializeField]
+        private BooleanReliableEvent _onRewindEvent;
+
         [Header("Input")]
         [SerializeField]
         private InputActionAsset _actions;
@@ -42,12 +45,12 @@ namespace PT
         // Rewind callbacks
         private void Rewind_started(CallbackContext obj)
         {
-            TimeManager.Instance.ChangeTimeScale(0.2f);
+            _onRewindEvent.Invoke(true);
 
         }
         private void Rewind_canceled(CallbackContext obj)
         {
-            TimeManager.Instance.ChangeTimeScale(1f);
+            _onRewindEvent.Invoke(false);
         }
     }
 }

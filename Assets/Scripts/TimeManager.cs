@@ -20,7 +20,9 @@ namespace Game
 
         public float CurrentTimeScale => _currentTimeScale;
 
-        public void ChangeTimeScale(float scale)
+        public void ChangeTimeScale(float scale) => ChangeTimeScale(scale, EaseDuration, EaseFunction);
+
+        public void ChangeTimeScale(float scale, float duration, EEasingFunction ease)
         {
             // Validate
             scale = Mathf.Clamp(scale, float.Epsilon, float.MaxValue);
@@ -28,17 +30,22 @@ namespace Game
             //Set up interpolation
             IInterpolationToken<float[]> t = InterpolationManager.Instance.StartInterpolation(
                 _inteprolationId,
-                EaseDuration,
+                duration,
                 new SInterpolation
                 (
                     _currentTimeScale,
                     scale,
-                    EaseFunction
+                    ease
                 )
             );
 
             // set up events
             t.OnInterpolationSubscriber.Subscribe(HandleTimeScaleInterpolation);
+        }
+
+        public void ChangeTimeScaleImmediate(float scale)
+        {
+
         }
 
         protected override void MonoAwake()
@@ -51,6 +58,11 @@ namespace Game
         private void HandleTimeScaleInterpolation(float[] newTimeScale)
         {
             float scale = newTimeScale[0];
+            SetTimeScale(scale);
+        }
+
+        private void SetTimeScale(float scale)
+        {
             _currentTimeScale = scale;
 
             Time.timeScale = scale;
