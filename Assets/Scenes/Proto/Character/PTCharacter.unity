@@ -123,6 +123,105 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &197601826 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 197601826, guid: b2cef91987b545e418161427b27ff3b8, type: 3}
+  m_PrefabInstance: {fileID: 6724266653929022588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &197601827 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 197601827, guid: b2cef91987b545e418161427b27ff3b8, type: 3}
+  m_PrefabInstance: {fileID: 6724266653929022588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &197601828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197601826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c04b99cca45676442b8efc93066ef30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Arrow: {fileID: 418544534}
+  currentDir: {x: 0, y: 0}
+--- !u!114 &197601829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197601826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b362a81116c055488fc48fe8df4ddb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _userChosenEvent: {fileID: 11400000, guid: 2123ae39e94894b429e2d39621cb031a, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 197601828}
+        m_TargetAssemblyTypeName: Game.CharThrowArrow, Assembly-CSharp
+        m_MethodName: SetDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &197601830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197601826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2666586b5ba154197ac01b91428bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _arrow: {fileID: 197601828}
+  _throw: {fileID: 1237483610}
+--- !u!114 &197601831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197601826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087f0df64891e0c4dad0dd4e862b9bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _userChosenEvent: {fileID: 11400000, guid: 6f7b29c9caf02ad469dc168ee9836f1d, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 197601830}
+        m_TargetAssemblyTypeName: BallThrowControl, Assembly-CSharp
+        m_MethodName: ThrowBall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &418544534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 418544534, guid: b2cef91987b545e418161427b27ff3b8, type: 3}
+  m_PrefabInstance: {fileID: 6724266653929022588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &435465630
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +331,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &439788403 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6706748840224963042, guid: a47d4905fda9f4246badd30dc24838bc, type: 3}
+  m_PrefabInstance: {fileID: 6706748839315874559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &472017504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,6 +1579,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1237483608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1237483609}
+  - component: {fileID: 1237483610}
+  m_Layer: 0
+  m_Name: BallLauncher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1237483609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237483608}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.009, y: 0.685, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 197601827}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1237483610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237483608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c314be4024a6834c958cb2eb8872564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ballrb: {fileID: 439788403}
+  _initialForce: 10
 --- !u!1 &1343370053
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,14 +2337,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2277378839467764255, guid: b2cef91987b545e418161427b27ff3b8, type: 3}
-      propertyPath: _moveAcceleration
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277378839467764255, guid: b2cef91987b545e418161427b27ff3b8, type: 3}
-      propertyPath: _moveMaxVelocity
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 7280352027376239740, guid: b2cef91987b545e418161427b27ff3b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

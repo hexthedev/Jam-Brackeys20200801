@@ -22,6 +22,12 @@ namespace PT
         [SerializeField]
         private VoidReliableEvent _onJump;
 
+        [SerializeField]
+        private VoidReliableEvent _onThrow;
+
+        [SerializeField]
+        private Vector2ReliableEvent _onLook;
+
         [Header("Input")]
         [SerializeField]
         private InputActionAsset _actions;
@@ -31,6 +37,10 @@ namespace PT
 
         private InputAction _moveAction;
         private bool _isMoving = false;
+
+        private InputAction _lookAction;
+        private bool _isLooking = false;
+
 
         void Awake()
         {
@@ -44,7 +54,17 @@ namespace PT
             _moveAction.started += PTGlobalInput_started;
             _moveAction.canceled += cc => _isMoving = false;
 
+            _lookAction = _actions.FindAction("Look");
+            _lookAction.started += cc => _isLooking = true;
+            _lookAction.canceled += cc =>
+            {
+                _isLooking = false;
+                _onLook.Invoke(Vector2.zero);
+            };
+
+
             _actions.FindAction("ActionSouth").started += cc => _onJump.Invoke();
+            _actions.FindAction("ActionEast").started += cc => _onThrow.Invoke();
         }
 
         private void PTGlobalInput_started(CallbackContext obj)
@@ -68,6 +88,11 @@ namespace PT
             if (_isMoving)
             {
                 _onMoveEvent.Invoke(_moveAction.ReadValue<Vector2>());
+            }
+
+            if (_isLooking)
+            {
+                _onLook.Invoke(_lookAction.ReadValue<Vector2>());
             }
         }
     }
