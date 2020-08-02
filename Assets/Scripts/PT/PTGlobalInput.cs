@@ -19,12 +19,18 @@ namespace PT
         [SerializeField]
         private BooleanReliableEvent _onRewindEvent;
 
+        [SerializeField]
+        private VoidReliableEvent _onJump;
+
         [Header("Input")]
         [SerializeField]
         private InputActionAsset _actions;
 
         [SerializeField]
         private string _rewindActionName = "ActionWest";
+
+        private InputAction _moveAction;
+        private bool _isMoving = false;
 
         void Awake()
         {
@@ -34,12 +40,16 @@ namespace PT
             rewind.started += Rewind_started;
             rewind.canceled += Rewind_canceled;
 
-            _actions.FindAction("Move").started += PTGlobalInput_started; ;
+            _moveAction = _actions.FindAction("Move");
+            _moveAction.started += PTGlobalInput_started;
+            _moveAction.canceled += cc => _isMoving = false;
+
+            _actions.FindAction("ActionSouth").started += cc => _onJump.Invoke();
         }
 
         private void PTGlobalInput_started(CallbackContext obj)
         {
-            _onMoveEvent.Invoke(obj.ReadValue<Vector2>());
+            _isMoving = true;
         }
 
         // Rewind callbacks
@@ -51,6 +61,14 @@ namespace PT
         private void Rewind_canceled(CallbackContext obj)
         {
             _onRewindEvent.Invoke(false);
+        }
+
+        private void Update()
+        {
+            if (_isMoving)
+            {
+                _onMoveEvent.Invoke(_moveAction.ReadValue<Vector2>());
+            }
         }
     }
 }
