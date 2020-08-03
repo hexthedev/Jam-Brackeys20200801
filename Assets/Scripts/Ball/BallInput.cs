@@ -15,15 +15,14 @@ namespace Game
     {
         [Header("Input Events")]
         [SerializeField]
-        private BooleanSoEvent OnRewind;
+        private BooleanSoEvent _onRewind;
 
         [Header("Systems")]
         [SerializeField]
-        private PTPathInterpolator _rewind;
+        private PathInterpolator _rewind;
 
         [SerializeField]
         private PTPathTracker _pathTracker;
-
 
         [Header("Options (Rewind)")]
         [SerializeField]
@@ -52,7 +51,8 @@ namespace Game
 
         private void Start()
         {
-            OnRewind.Event.Subscribe(HandleRewind);
+            _onRewind.Event.Subscribe(HandleRewind);
+            _rewind.OnEndDistance._event.Subscribe(HandleRewindEnd);
         }
 
         private void HandleRewind(bool rewind)
@@ -61,14 +61,15 @@ namespace Game
             {
                 if (!_isRewindHot) return;
                 //TimeManager.Instance.ChangeTimeScale(_timeScaleRewind, _timeChangeDuration, _timeEase);
-                _rewind.PerformInterpolation(_pathTracker.CurrentPath, _rewindDuration, _rewindEase);
-                _pathTracker.StopTrackAndClear();
+                _pathTracker.StopTrack();
+                _rewind.PerformInterpolation(_pathTracker.GetLastCrumbs(60), _rewindDuration, _rewindEase);
                 _isRewindHot = false;
             }
             else
             {
                 //TimeManager.Instance.ChangeTimeScale(1, _timeChangeDuration, _timeEase);
                 _rewind.StopInterpolating();
+                _pathTracker.StartTrack();
                 StartCoroutine(RewindCooldown());
             }
         }
@@ -78,7 +79,12 @@ namespace Game
         {
             yield return new WaitForSeconds(_cooldown);
             _isRewindHot = true;
-            _pathTracker.StartTrack();
+        }
+
+
+        private void HandleRewindEnd(float steps)
+        {
+            _pathTracker.ClearCrumbs((int)steps);
         }
     }
 }

@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6706748840224963044
 Transform:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.05
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 765f04ce24e44fb43b9ffb6298f487d0, type: 2}
@@ -137,12 +137,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a172c040d26803b4f8b59b005a2d5c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnRewind: {fileID: 11400000, guid: f83d6514f433e36479b266762f0873d4, type: 2}
+  _onRewind: {fileID: 11400000, guid: f83d6514f433e36479b266762f0873d4, type: 2}
   _rewind: {fileID: 6706748840224963037}
   _pathTracker: {fileID: 6706748840224963038}
   _rewindDuration: 1
   _rewindEase: 6
-  _cooldown: 2
+  _cooldown: 0.5
 --- !u!114 &6706748840224963038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,10 +155,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbdb03318ae8ddd4f87cd72604cacb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PathSaveFrames: 60
-  PathPointPrefab: {fileID: 0}
+  PathSaveFrames: 240
+  PathPointPrefab: {fileID: 614947094544765924, guid: 1ba2a4138b72794418d78dc0aa406db5, type: 3}
   target: {fileID: 6706748840224963044}
   PlayOnAwake: 1
+  _gradientCrumbCount: 60
 --- !u!114 &6706748840224963037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8dfe6f4b2aa4e14bb8b42928a800892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEndDistance:
+    _unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
   _rb: {fileID: 6706748840224963042}
 --- !u!1 &6706748840425751819
 GameObject:
