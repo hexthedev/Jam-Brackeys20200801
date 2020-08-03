@@ -1353,6 +1353,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 976732245}
     m_Modifications:
+    - target: {fileID: 3509079617096717270, guid: a47d4905fda9f4246badd30dc24838bc, type: 3}
+      propertyPath: _rewindEase
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6706748840224963038, guid: a47d4905fda9f4246badd30dc24838bc, type: 3}
       propertyPath: PathSaveFrames
       value: 3600
