@@ -17,6 +17,12 @@ namespace Game
         [SerializeField]
         private BooleanSoEvent _onRewind;
 
+        [SerializeField]
+        private VoidSoEvent _onNextLevel;
+
+        [SerializeField]
+        private VoidSoEvent _onReset;
+
         [Header("Systems")]
         [SerializeField]
         private PathInterpolator _rewind;
@@ -56,6 +62,7 @@ namespace Game
         {
             _onRewind.Event.Subscribe(HandleRewind);
             _rewind.OnEndDistance._event.Subscribe(HandleRewindEnd);
+            //_onReset.Event.Subscribe(HandleReset);
         }
 
         private void HandleRewind(bool rewind)
@@ -86,6 +93,8 @@ namespace Game
         public void StartSimulation()
         {
             _simulatedBody.simulated = true;
+            _simulatedBody.velocity = Vector2.zero;
+            _simulatedBody.angularVelocity = 0;
             _pathTracker.StartTrack();
         }
 
@@ -93,6 +102,11 @@ namespace Game
         {
             _simulatedBody.simulated = false;
             _pathTracker.StopTrackAndClear();
+        }
+
+        public void NotifyNextLevel()
+        {
+            _onNextLevel.Invoke();
         }
 
         IEnumerator RewindCooldown()

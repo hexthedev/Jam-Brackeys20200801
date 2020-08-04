@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6706748840224963037}
   - component: {fileID: 294834545}
   - component: {fileID: 1265629284451561203}
+  - component: {fileID: 744893015}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -80,11 +81,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c713ed3c2eb174640808546c9d764514, type: 3}
-  m_Color: {r: 1, g: 0.46545076, b: 0.006289184, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 0.33333334, y: 0.33333334}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -140,9 +141,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onRewind: {fileID: 11400000, guid: f83d6514f433e36479b266762f0873d4, type: 2}
+  _onNextLevel: {fileID: 11400000, guid: b82c3eecf33f4814887d1522b8c635a4, type: 2}
+  _onReset: {fileID: 0}
   _rewind: {fileID: 6706748840224963037}
   _pathTracker: {fileID: 6706748840224963038}
-  _simulatedBody: {fileID: 0}
+  _simulatedBody: {fileID: 6706748840224963042}
   _rewindDuration: 1
   _rewindEase: 6
   _cooldown: 0.5
@@ -161,7 +164,7 @@ MonoBehaviour:
   PathSaveFrames: 3600
   PathPointPrefab: {fileID: 614947094544765924, guid: 1ba2a4138b72794418d78dc0aa406db5, type: 3}
   target: {fileID: 6706748840224963044}
-  PlayOnAwake: 1
+  PlayOnAwake: 0
   _gradientCrumbCount: 60
 --- !u!114 &6706748840224963037
 MonoBehaviour:
@@ -225,6 +228,34 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &744893015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6706748840224963045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087f0df64891e0c4dad0dd4e862b9bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _userChosenEvent: {fileID: 11400000, guid: 032b959aa53376a41ad57bfe2945d61c, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 294834545}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: NextLevel
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6706748840425751819

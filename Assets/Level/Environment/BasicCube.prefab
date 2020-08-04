@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 89865684362506518}
   - component: {fileID: 89865684362506519}
   - component: {fileID: 7815923178290353052}
-  - component: {fileID: 7815923178290353055}
   m_Layer: 0
   m_Name: BasicCube
   m_TagString: Untagged
@@ -140,6 +139,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: b82c3eecf33f4814887d1522b8c635a4, type: 2}
+          m_TargetAssemblyTypeName: HexUN.Events.VoidSoEvent, HexUN
+          m_MethodName: Invoke
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _onMoveLevel:
     _unityEvent:
       m_PersistentCalls:
@@ -158,15 +169,3 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   _move: {x: 0, y: 8}
---- !u!114 &7815923178290353055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89865684362506513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2f487934cf49914ebdb33e1b3cbc004, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
