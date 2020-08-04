@@ -5,14 +5,19 @@ namespace Game
     [CreateAssetMenu(fileName = "LevelList", menuName = "Game/LevelList")]
     public class LevelList : ScriptableObject
     {
+
+        [SerializeField]
         private int _currentLevel = -1;
 
         [SerializeField]
         private LevelControl[] ControlPrefabs;
 
+        [SerializeField]
+        private int _startLevel = 0;
+
         public void Reset()
         {
-            _currentLevel = -1;
+            _currentLevel = _startLevel - 1;
         }
 
         /// <summary>

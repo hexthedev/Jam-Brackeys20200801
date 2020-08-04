@@ -20,9 +20,6 @@ namespace Game
         [SerializeField]
         private VoidSoEvent _onNextLevel;
 
-        [SerializeField]
-        private VoidSoEvent _onReset;
-
         [Header("Systems")]
         [SerializeField]
         private PathInterpolator _rewind;
@@ -87,13 +84,13 @@ namespace Game
         public void PositionInLevel()
         {
             BallSpawn s = LevelManager.Instance.Current?.spawn;
+            _simulatedBody.velocity = s.InitialVelocity * s.force;
             if(s != null) gameObject.transform.position = s.transform.position;
         }
 
         public void StartSimulation()
         {
             _simulatedBody.simulated = true;
-            _simulatedBody.velocity = Vector2.zero;
             _simulatedBody.angularVelocity = 0;
             _pathTracker.StartTrack();
         }

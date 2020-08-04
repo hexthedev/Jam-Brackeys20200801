@@ -8,6 +8,8 @@ using UnityEngine;
 namespace Game {
     public class LevelSwitchHandler : MonoBehaviour
     {
+        private const float levelSlide = 10;
+
         private int _interpId;
         public LevelList _levels;
         public float transitionDuration;
@@ -31,6 +33,7 @@ namespace Game {
                 LevelControl inst = Instantiate(ctrl, transform);
                 inst.transform.position = new Vector3(0, 0, 0);
                 _currentLevel = inst;
+                LevelManager.Instance.RegisterAsCurrent(inst);
             }
         }
 
@@ -40,7 +43,7 @@ namespace Game {
             if(_levels.ProvideNextLevel(out LevelControl ctrl))
             {
                 LevelControl inst = Instantiate(ctrl, transform);
-                inst.transform.position = new Vector3(-8, 0, 0);
+                inst.transform.position = new Vector3(-levelSlide, 0, 0);
 
                 IInterpolationToken<float[]> toke = InterpolationManager.Instance.StartInterpolation(
                     _interpId,
@@ -48,7 +51,7 @@ namespace Game {
                     new SInterpolation()
                     {
                         Start = 0,
-                        End = 8,
+                        End = levelSlide,
                         Ease = ease
                     }
                 );
@@ -57,7 +60,7 @@ namespace Game {
                     f =>
                     {
                         _currentLevel.transform.position = new Vector3(f[0], _currentLevel.transform.position.y, _currentLevel.transform.position.z);
-                        inst.transform.position = new Vector3(f[0]-8, inst.transform.position.y, inst.transform.position.z);
+                        inst.transform.position = new Vector3(f[0]- levelSlide, inst.transform.position.y, inst.transform.position.z);
                     }
                 );
 

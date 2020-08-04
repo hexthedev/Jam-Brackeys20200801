@@ -6,6 +6,9 @@ namespace Game
 {
     public class BallSpawn : MonoBehaviour
     {
+        public Vector3 InitialVelocity;
+        public float force;
+
         private void OnDrawGizmos()
         {
             Gizmos.matrix = transform.localToWorldMatrix;
