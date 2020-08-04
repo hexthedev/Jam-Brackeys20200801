@@ -15,13 +15,15 @@ GameObject:
   - component: {fileID: 3509079617096717270}
   - component: {fileID: 6706748840224963038}
   - component: {fileID: 6706748840224963037}
+  - component: {fileID: 294834545}
+  - component: {fileID: 1265629284451561203}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6706748840224963044
 Transform:
   m_ObjectHideFlags: 0
@@ -97,11 +99,11 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6706748840224963045}
   m_BodyType: 0
-  m_Simulated: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.05
+  m_LinearDrag: 0.2
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 765f04ce24e44fb43b9ffb6298f487d0, type: 2}
@@ -140,6 +142,7 @@ MonoBehaviour:
   _onRewind: {fileID: 11400000, guid: f83d6514f433e36479b266762f0873d4, type: 2}
   _rewind: {fileID: 6706748840224963037}
   _pathTracker: {fileID: 6706748840224963038}
+  _simulatedBody: {fileID: 0}
   _rewindDuration: 1
   _rewindEase: 6
   _cooldown: 0.5
@@ -155,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbdb03318ae8ddd4f87cd72604cacb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PathSaveFrames: 240
+  PathSaveFrames: 3600
   PathPointPrefab: {fileID: 614947094544765924, guid: 1ba2a4138b72794418d78dc0aa406db5, type: 3}
   target: {fileID: 6706748840224963044}
   PlayOnAwake: 1
@@ -177,6 +180,53 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   _rb: {fileID: 6706748840224963042}
+--- !u!95 &294834545
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6706748840224963045}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc753b5f5829a2a4ea5f227d7a9a9a7b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1265629284451561203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6706748840224963045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab107b8d2c716c45b67bef919cc4b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _userChosenEvent: {fileID: 11400000, guid: dd1534a8053a5c94c89a64e8b77409ab, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 294834545}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6706748840425751819
 GameObject:
   m_ObjectHideFlags: 0

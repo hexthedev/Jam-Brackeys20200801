@@ -24,6 +24,9 @@ namespace Game
         [SerializeField]
         private PTPathTracker _pathTracker;
 
+        [SerializeField]
+        private Rigidbody2D _simulatedBody;
+
         [Header("Options (Rewind)")]
         [SerializeField]
         [Range(0.5f, 3f)]
@@ -74,13 +77,29 @@ namespace Game
             }
         }
 
+        public void PositionInLevel()
+        {
+            BallSpawn s = LevelManager.Instance.Current?.spawn;
+            if(s != null) gameObject.transform.position = s.transform.position;
+        }
+
+        public void StartSimulation()
+        {
+            _simulatedBody.simulated = true;
+            _pathTracker.StartTrack();
+        }
+
+        public void StopSimulation()
+        {
+            _simulatedBody.simulated = false;
+            _pathTracker.StopTrackAndClear();
+        }
 
         IEnumerator RewindCooldown()
         {
             yield return new WaitForSeconds(_cooldown);
             _isRewindHot = true;
         }
-
 
         private void HandleRewindEnd(float steps)
         {

@@ -15,6 +15,9 @@ namespace Game
 
         public Rigidbody2D _player;
 
+        public float slowScale = 0.25f;
+        public float transitionTime = 1f;
+
         public void Awake()
         {
             _moveLevelEvent.Event.Subscribe(Move);
@@ -28,7 +31,7 @@ namespace Game
 
         IEnumerator MoveRoutine(Vector2 move)
         {
-            TimeManager.Instance.ChangeTimeScale(0.25f);
+            TimeManager.Instance.ChangeTimeScale(slowScale);
 
             float recGrav = _player.gravityScale;
             _player.gravityScale = 0;
@@ -37,13 +40,13 @@ namespace Game
                 _interpId,
                 transform.position,
                 transform.position + new Vector3(move.x, move.y, 0),
-                0.75f,
+                transitionTime * slowScale,
                 EEasingFunction.Out_Cubic
             );
 
             interp.OnInterpolationSubscriber.Subscribe( v => transform.position = v );
 
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(transitionTime * slowScale);
             TimeManager.Instance.ChangeTimeScale(1f);
 
             _player.gravityScale = recGrav;
